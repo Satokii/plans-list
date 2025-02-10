@@ -51,10 +51,11 @@
 }
 
 /* Log Out Button */
-button {
+.log-out-btn {
   background: #ff6f00;
   color: white;
   font-size: 18px;
+  font-family: "Indie Flower", cursive;
   padding: 10px 15px;
   border: none;
   border-radius: 8px;
@@ -63,7 +64,7 @@ button {
   margin: 10px;
 }
 
-button:hover {
+.log-out-btn:hover {
   background: #e65c00;
   transform: scale(1.05);
 }
@@ -170,11 +171,20 @@ button:hover {
   font-size: 14px;
   text-align: center;
   margin-left: 10px;
+  font-family: "Indie Flower", cursive;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.task button:first-of-type {
+.complete-btn {
+  background-color: green;
   margin-left: auto;
 }
+.complete-btn:hover {
+    background-color: rgb(3, 93, 3);
+  }
 
 @keyframes wiggle {
   0%,
@@ -192,11 +202,11 @@ button:hover {
   }
 }
 
-.removeButton {
+.remove-btn {
   background: #ff3b3b;
 }
 
-.removeButton:hover {
+.remove-btn:hover {
   background: #d32f2f;
   animation: wiggle 0.2s ease-in-out;
 }

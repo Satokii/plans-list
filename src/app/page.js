@@ -76,7 +76,7 @@ export default function Home() {
   return (
     <div className="container">
       <h1 className="title">To-Do List</h1>
-      <button onClick={handleSignOut}>Log out</button>
+      <button className="log-out-btn" onClick={handleSignOut}>Log out</button>
       <div className="inputContainer">
         <input
           type="text"
@@ -95,12 +95,12 @@ export default function Home() {
             <span className={task.completed ? "completed" : ""}>
               {task.text}
             </span>
-            <button onClick={() => toggleTask(task.id, task.completed)}>
+            <button className="complete-btn" onClick={() => toggleTask(task.id, task.completed)}>
               {task.completed ? "Add to List" : "Complete"}
             </button>
             <button
               onClick={() => removeTask(task.id)}
-              className="removeButton"
+              className="remove-btn"
             >
               ✖
             </button>
