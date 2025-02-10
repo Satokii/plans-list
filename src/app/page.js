@@ -60,6 +60,7 @@ export default function Home() {
       );
     }
   };
+
   const removeTask = async (id) => {
     const { error } = await supabase.from("todos").delete().match({ id });
     if (!error) {
@@ -67,9 +68,15 @@ export default function Home() {
     }
   };
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push("/login");
+  };
+
   return (
     <div className="container">
       <h1 className="title">To-Do List</h1>
+      <button onClick={handleSignOut}>Log out</button>
       <div className="inputContainer">
         <input
           type="text"
