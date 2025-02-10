@@ -149,11 +149,18 @@
   transition: 0.3s ease-in-out;
   width: 100%;
   animation: slideIn 0.5s ease-out;
+  min-height: 50px;
+  overflow: hidden;
 }
 
 .task span {
   flex: 1;
   padding-left: 10px;
+  padding-right: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%; 
 }
 
 /* Completed Tasks */
@@ -166,7 +173,7 @@
 /* Complete & Remove Buttons */
 .task button {
   flex-shrink: 0;
-  min-width: 120px;
+  min-width: 100px;
   padding: 8px 12px;
   font-size: 14px;
   text-align: center;
@@ -234,9 +241,16 @@
     flex-wrap: wrap;
   }
 
+  .task span {
+    white-space: normal;
+    max-width: 100%;
+  }
+
   .task button {
-    min-width: auto;
     padding: 6px 10px;
     font-size: 12px;
+    width: 100%;
+    margin-top: 5px;
+    margin-left: 0;
   }
 }
