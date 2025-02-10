@@ -158,13 +158,13 @@ export default function Home() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Add a new task..."
+          placeholder="Add a new activity..."
           className="input"
         />
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Optional description..."
+          placeholder="Description (optional)..."
           className="description-input"
         />
         <button onClick={addTask} className="add-button">
