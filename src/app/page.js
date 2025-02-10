@@ -167,7 +167,7 @@ export default function Home() {
       </div>
 
       {/* Active Tasks Section */}
-      <h2>Active Tasks</h2>
+      <h2 className="tasks-header">To Do:</h2>
       <ul className="list">
         {tasks
           .filter((task) => !task.completed)
@@ -222,7 +222,7 @@ export default function Home() {
       </ul>
 
       {/* Completed Tasks Section */}
-      <h2 className="completed-tasks-header">Completed Tasks</h2>
+      <h2 className="completed-tasks-header">Completed:</h2>
       <ul className="completed-tasks-list">
         {tasks.filter((task) => task.completed).length === 0 ? (
           <p className="no-tasks">No completed tasks yet!</p>

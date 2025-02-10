@@ -126,6 +126,17 @@
 }
 
 /* Task List */
+.tasks-header, .completed-tasks-header {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-top: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 3px solid #ff6f00;
+}
+
 .list,
 .completed-tasks-list {
   width: 100%;
@@ -339,6 +350,15 @@
     font-size: 14px;
     padding: 5px 16px;
   }
+
+  .tasks-header, .completed-tasks-header {
+    font-size: 20px;
+    font-weight: 200;
+    color: black;
+    margin-top: 15px;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #ff6f00;
+}
 
   .list,
   .completed-tasks-list {
