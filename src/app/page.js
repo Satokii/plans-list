@@ -9,8 +9,8 @@ import "./styles.css";
 export default function Home() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
+  const [description, setDescription] = useState(""); 
   const [user, setUser] = useState(null);
-  const [taskDescription, setTaskDescription] = useState("");
   const [expandedTaskId, setExpandedTaskId] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
@@ -47,7 +47,7 @@ export default function Home() {
       .insert([
         {
           text: input,
-          description: taskDescription,
+          description: description,
           completed: false,
           user_id: user.id,
         },
@@ -57,7 +57,7 @@ export default function Home() {
     if (!error) {
       setTasks([data[0], ...tasks]);
       setInput("");
-      setTaskDescription("");
+      setDescription("");
     }
   };
 
@@ -103,7 +103,7 @@ export default function Home() {
       return;
     }
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("todos")
       .update({ completed: false })
       .eq("id", taskId)
@@ -160,6 +160,12 @@ export default function Home() {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Add a new task..."
           className="input"
+        />
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Optional description"
+          className="description-input"
         />
         <button onClick={addTask} className="add-button">
           Add
