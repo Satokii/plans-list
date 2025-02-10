@@ -90,6 +90,7 @@ button:hover {
   outline: none;
   background: #fff4e6;
   color: black;
+  font-family: "Indie Flower", cursive;
   transition: 0.3s ease;
 }
 
