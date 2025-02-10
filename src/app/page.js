@@ -251,7 +251,7 @@ export default function Home() {
                     className="restore-btn"
                     onClick={() => restoreTask(task.id)}
                   >
-                    Restore
+                    Add Back To List
                   </button>
                 </div>
 
