@@ -164,7 +164,7 @@ export default function Home() {
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Optional description"
+          placeholder="Optional description..."
           className="description-input"
         />
         <button onClick={addTask} className="add-button">

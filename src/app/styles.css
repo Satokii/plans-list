@@ -77,39 +77,53 @@
 /* Input */
 .input-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
   max-width: 500px;
-  padding: 12px;
+  padding: 16px;
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.9);
-  padding: 10px;
   border-radius: 12px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  align-items: center;
+  align-items: flex-start;
 }
 
-.input {
-  flex: 1;
-  padding: 8px 12px;
+.input-container .input,
+.description-input {
+  width: 100%;
+  color: black;
+  font-family: "Indie Flower", cursive;
   margin-right: 12px;
-  font-size: 16px;
+  margin-bottom: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
   outline: none;
   background: #fff4e6;
-  color: black;
-  font-family: "Indie Flower", cursive;
   transition: 0.3s ease;
 }
 
-.input:focus {
+.input-container .input {
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+.description-input {
+  min-height: 60px;
+  font-size: 14px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.input-container .input:focus,
+.description-input:focus {
   box-shadow: 0px 0px 8px rgba(255, 111, 0, 0.7);
 }
 
 /* Add Task Button */
 .add-button {
   background: #ff6f00;
+  width: 100%;
   font-family: "Indie Flower", cursive;
   color: white;
   font-size: 16px;
@@ -122,19 +136,19 @@
 
 .add-button:hover {
   background: #e65c00;
-  transform: scale(1.1);
 }
 
 /* Task List */
-.tasks-header, .completed-tasks-header {
-    font-size: 28px;
-    font-weight: bold;
-    color: black;
-    margin-top: 25px;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 3px solid #ff6f00;
+.tasks-header,
+.completed-tasks-header {
+  font-size: 28px;
+  font-weight: bold;
+  color: black;
+  margin-top: 25px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 3px solid #ff6f00;
 }
 
 .list,
@@ -351,14 +365,15 @@
     padding: 5px 16px;
   }
 
-  .tasks-header, .completed-tasks-header {
+  .tasks-header,
+  .completed-tasks-header {
     font-size: 20px;
     font-weight: 200;
     color: black;
     margin-top: 15px;
     letter-spacing: 1px;
     border-bottom: 2px solid #ff6f00;
-}
+  }
 
   .list,
   .completed-tasks-list {
