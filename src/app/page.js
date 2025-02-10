@@ -14,7 +14,6 @@ export default function Home() {
   const [expandedTaskId, setExpandedTaskId] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
-  const [completedTasks, setCompletedTasks] = useState([]);
 
   const router = useRouter();
 
@@ -112,7 +111,7 @@ export default function Home() {
       .select();
 
     if (error) {
-      console.error("❌ Error restoring task:", error);
+      console.error("Error restoring task:", error);
       return;
     }
 
@@ -122,29 +121,6 @@ export default function Home() {
       )
     );
   };
-
-  // const toggleTask = async (id, completed) => {
-  //   const { error } = await supabase
-  //     .from("todos")
-  //     .update({ completed: !completed })
-  //     .match({ id });
-  //   if (!error) {
-  //     setShowConfetti(true);
-  //     setFadeOut(false);
-
-  //     setTimeout(() => {
-  //       setFadeOut(true);
-  //     }, 2500);
-
-  //     setTimeout(() => setShowConfetti(false), 4000);
-
-  //     setTasks(
-  //       tasks.map((task) =>
-  //         task.id === id ? { ...task, completed: !completed } : task
-  //       )
-  //     );
-  //   }
-  // };
 
   const removeTask = async (id) => {
     const { error } = await supabase.from("todos").delete().match({ id });
@@ -160,7 +136,6 @@ export default function Home() {
 
   return (
     <div className="container">
-      {/* Confetti Effect */}
       {showConfetti && (
         <Confetti
           width={window.innerWidth}
@@ -207,7 +182,6 @@ export default function Home() {
               >
                 <span className="task-text">{task.text}</span>
 
-                {/* Complete Task Button */}
                 <button
                   className="complete-btn"
                   onClick={(e) => {
@@ -218,7 +192,6 @@ export default function Home() {
                   Complete
                 </button>
 
-                {/* Remove Task Button */}
                 <button
                   className="remove-btn"
                   onClick={(e) => {
@@ -230,7 +203,6 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* Expand Task Details */}
               {expandedTaskId === task.id && (
                 <div className="task-details">
                   <div>
@@ -278,7 +250,6 @@ export default function Home() {
                     </button>
                   </div>
 
-                  {/* Expand Task Details for Completed Tasks */}
                   {expandedTaskId === task.id && (
                     <div className="task-details">
                       <div>
