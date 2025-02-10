@@ -222,7 +222,6 @@ export default function Home() {
       </ul>
 
       {/* Completed Tasks Section */}
-      {/* <div className="completed-tasks-container"> */}
       <h2 className="completed-tasks-header">Completed Tasks</h2>
       <ul className="completed-tasks-list">
         {tasks.filter((task) => task.completed).length === 0 ? (
@@ -270,6 +269,5 @@ export default function Home() {
         )}
       </ul>
     </div>
-    // </div>
   );
 }
