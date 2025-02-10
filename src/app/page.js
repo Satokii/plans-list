@@ -2,32 +2,45 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
 import "./styles.css";
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
+  const [user, setUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    fetchTasks();
-  }, []);
+    const checkUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/login");
+      } else {
+        setUser(user);
+        fetchTasks(user.id);
+      }
+    };
+    checkUser();
+  }, [router]);
 
-  const fetchTasks = async () => {
+  const fetchTasks = async (userId) => {
     const { data, error } = await supabase
       .from("todos")
       .select("*")
-      .order("created_at", { ascending: false });
-    if (error) console.error(error);
-    else setTasks(data);
+      .eq("user_id", userId);
+    if (!error) setTasks(data);
   };
 
   const addTask = async () => {
-    if (input.trim() === "") return;
+    if (!user || input.trim() === "") return;
     const { data, error } = await supabase
       .from("todos")
-      .insert([{ text: input, completed: false }])
+      .insert([{ text: input, completed: false, user_id: user.id }])
       .select();
-      
+
     if (!error) {
       setTasks([data[0], ...tasks]);
       setInput("");
@@ -78,7 +91,10 @@ export default function Home() {
             <button onClick={() => toggleTask(task.id, task.completed)}>
               {task.completed ? "Add to List" : "Complete"}
             </button>
-            <button onClick={() => removeTask(task.id)} className="removeButton">
+            <button
+              onClick={() => removeTask(task.id)}
+              className="removeButton"
+            >
               ✖
             </button>
           </li>
