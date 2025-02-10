@@ -52,7 +52,7 @@
 
 /* Log Out Button */
 .log-out-btn {
-  position: fixed;
+  position: absolute;
   top: 30px;
   right: 30px;
   background: #ff4500;
@@ -281,6 +281,10 @@
 
 /* MEDIA QUERIES */
 @media (max-width: 600px) {
+  .container {
+    padding: 70px 20px;
+  }
+
   .title {
     font-size: 32px;
   }
@@ -319,20 +323,28 @@
     padding: 12px;
     margin-top: 12px;
   }
- 
+
   .task-details h4 {
     font-size: 16px;
   }
-  
+
   .full-title {
     font-size: 14px;
   }
-  
+
   .task-description {
     font-size: 13px;
   }
-  
+
   .task-details p {
     padding: 4px 0;
+  }
+
+  .log-out-btn {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    font-size: 16px;
+    padding: 5px 10px;
   }
 }
