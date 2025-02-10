@@ -93,6 +93,8 @@
   color: #ff6f00;
 }
 
+/* MEDIA QUERIES */
+
 /* Mobile (max-width: 600px) */
 @media only screen and (max-width: 600px) {
   .auth-container {
@@ -100,10 +102,10 @@
   }
 
   .auth-box {
-    width: 100%; /* Make box take full width on small screens */
+    width: 100%;
     padding: 1.5rem;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-    margin: 0; /* Remove margin for full-width form */
+    margin: 0;
   }
 
   .auth-box h1 {
@@ -122,7 +124,6 @@
   }
 }
 
-/* ----------------------------- */
 /* Tablet (max-width: 768px) */
 @media only screen and (max-width: 768px) {
   .auth-box {
