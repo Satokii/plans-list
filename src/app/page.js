@@ -14,6 +14,7 @@ export default function Home() {
   const [expandedTaskId, setExpandedTaskId] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const [completedTasks, setCompletedTasks] = useState([]);
 
   const router = useRouter();
 
@@ -175,6 +176,27 @@ export default function Home() {
     }
   };
 
+  // fetch completed tasks
+  const fetchCompletedTasks = async (userId) => {
+    const { data, error } = await supabase
+      .from("completed_tasks")
+      .select("*, todos(text, completed)")
+      .eq("user_id", userId);
+
+    if (error) {
+      console.error("Error fetching completed tasks:", error);
+      return;
+    }
+
+    setCompletedTasks(data);
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchCompletedTasks(user.id);
+    }
+  }, [user]);
+
   return (
     <div className="container">
       {showConfetti && (
@@ -253,6 +275,26 @@ export default function Home() {
           </li>
         ))}
       </ul>
+      <div className="completed-tasks-container">
+        <h2>Completed Tasks</h2>
+        <ul className="completed-tasks-list">
+          {completedTasks.length === 0 ? (
+            <p>No completed tasks yet!</p>
+          ) : (
+            completedTasks.map((task) => (
+              <li key={task.id} className="completed-task">
+                <h4>{task.todos.text}</h4>
+                <p>
+                  {task.todos.completed ? "Completed" : "Not completed yet"}
+                </p>
+                <button onClick={() => restoreTask(task.todos.id)}>
+                  Restore to Main List
+                </button>
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
