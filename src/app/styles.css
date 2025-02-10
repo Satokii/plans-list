@@ -1,65 +1,231 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Background */
 .container {
-    max-width: 400px;
-    margin: 50px auto;
-    text-align: center;
-    font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff7f32, #ff914d);
+  font-family: "Indie Flower", cursive;
+  padding: 20px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Title */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  
+  50% {
+    transform: translateY(-5px) translateX(-2px);
+  }
+}
+
+.title {
+  font-size: 42px;
+  color: white;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.title::before {
+  content: "🐇";
+  font-size: 48px;
+  margin-right: 10px;
+  animation: bounce 1.5s infinite alternate ease-in-out;
+}
+
+/* Log Out Button */
+button {
+  background: #ff6f00;
+  color: white;
+  font-size: 18px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin: 10px;
+}
+
+button:hover {
+  background: #e65c00;
+  transform: scale(1.05);
+}
+
+/* Input */
+.inputContainer {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: #fff4e6;
+  color: black;
+  transition: 0.3s ease;
+}
+
+.input:focus {
+  box-shadow: 0px 0px 8px rgba(255, 111, 0, 0.7);
+}
+
+/* Add Task Button */
+.addButton {
+  background: #ff6f00;
+  color: white;
+  font-size: 16px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.addButton:hover {
+  background: #e65c00;
+  transform: scale(1.1);
+}
+
+/* Task List */
+.list {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  color: black;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  font-size: 18px;
+  transition: 0.3s ease-in-out;
+  width: 100%;
+  animation: slideIn 0.5s ease-out;
+}
+
+.task span {
+  flex: 1;
+  padding-left: 10px;
+}
+
+/* Completed Tasks */
+.completed {
+  text-decoration: line-through;
+  color: gray;
+  opacity: 0.7;
+}
+
+/* Complete & Remove Buttons */
+.task button {
+  flex-shrink: 0;
+  min-width: 120px;
+  padding: 8px 12px;
+  font-size: 14px;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.task button:first-of-type {
+  margin-left: auto;
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+}
+
+.removeButton {
+  background: #ff3b3b;
+}
+
+.removeButton:hover {
+  background: #d32f2f;
+  animation: wiggle 0.2s ease-in-out;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 600px) {
   .title {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 32px;
   }
-  
+
+  .title::before {
+    font-size: 36px;
+  }
+
   .inputContainer {
-    display: flex;
-    justify-content: space-between;
+    max-width: 90%;
   }
-  
-  .input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .addButton {
-    background: #0070f3;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    margin-left: 5px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
+
   .list {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
+    max-width: 90%;
   }
-  
+
   .task {
-    display: flex;
-    justify-content: space-between;
-    background: #f9f9f9;
-    background: blue;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 4px;
-    cursor: pointer;
+    font-size: 16px;
+    flex-wrap: wrap;
   }
-  
-  .completed {
-    text-decoration: line-through;
-    color: green;
+
+  .task button {
+    min-width: auto;
+    padding: 6px 10px;
+    font-size: 12px;
   }
-  
-  .removeButton {
-    background: red;
-    color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
+}
