@@ -276,7 +276,7 @@ export default function Home() {
         ))}
       </ul>
       <div className="completed-tasks-container">
-        <h2>Completed Tasks</h2>
+        <h2 className="completed-tasks-header">Completed Tasks</h2>
         <ul className="completed-tasks-list">
           {completedTasks.length === 0 ? (
             <p>No completed tasks yet!</p>

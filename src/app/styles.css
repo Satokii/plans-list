@@ -284,6 +284,51 @@
   animation: wiggle 0.2s ease-in-out;
 }
 
+/* Completed tasks */
+.completed-tasks-container {
+  margin-top: 50px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.completed-tasks-header {
+  color: black;
+}
+
+.completed-tasks-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.completed-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+.completed-task h4 {
+  color: #4e9f3d;
+}
+
+.completed-task button {
+  background-color: #ff6347;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.completed-task button:hover {
+  background-color: #ff4500;
+}
+
 /* MEDIA QUERIES */
 @media (max-width: 600px) {
   .container {
