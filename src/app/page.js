@@ -66,28 +66,78 @@ export default function Home() {
     setExpandedTaskId(expandedTaskId === taskId ? null : taskId);
   };
 
-  const toggleTask = async (id, completed) => {
-    const { error } = await supabase
-      .from("todos")
-      .update({ completed: !completed })
-      .match({ id });
-    if (!error) {
-      setShowConfetti(true);
-      setFadeOut(false);
-
-      setTimeout(() => {
-        setFadeOut(true);
-      }, 2500);
-
-      setTimeout(() => setShowConfetti(false), 4000);
-
-      setTasks(
-        tasks.map((task) =>
-          task.id === id ? { ...task, completed: !completed } : task
-        )
-      );
+  const markTaskAsComplete = async (taskId) => {
+    if (!user || !user.id) {
+      console.error("User is not logged in or user ID is missing.");
+      return;
     }
+
+    const { data, error } = await supabase
+      .from("todos")
+      .update({ completed: true })
+      .eq("id", taskId)
+      .eq("user_id", user.id)
+      .select();
+
+    if (error) {
+      console.error("Error updating task:", error);
+      return;
+    }
+
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, completed: true } : task
+      )
+    );
   };
+
+  const restoreTask = async (taskId) => {
+    if (!user || !user.id) {
+      console.error("User is not logged in or user ID is missing.");
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("todos")
+      .update({ completed: false })
+      .eq("id", taskId)
+      .eq("user_id", user.id)
+      .select();
+
+    if (error) {
+      console.error("❌ Error restoring task:", error);
+      return;
+    }
+
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, completed: false } : task
+      )
+    );
+  };
+
+  // const toggleTask = async (id, completed) => {
+  //   const { error } = await supabase
+  //     .from("todos")
+  //     .update({ completed: !completed })
+  //     .match({ id });
+  //   if (!error) {
+  //     setShowConfetti(true);
+  //     setFadeOut(false);
+
+  //     setTimeout(() => {
+  //       setFadeOut(true);
+  //     }, 2500);
+
+  //     setTimeout(() => setShowConfetti(false), 4000);
+
+  //     setTasks(
+  //       tasks.map((task) =>
+  //         task.id === id ? { ...task, completed: !completed } : task
+  //       )
+  //     );
+  //   }
+  // };
 
   const removeTask = async (id) => {
     const { error } = await supabase.from("todos").delete().match({ id });
@@ -100,102 +150,6 @@ export default function Home() {
     await supabase.auth.signOut();
     router.push("/login");
   };
-
-  // Mark task as complete
-
-  const markAsCompleted = async (taskId) => {
-    const { data: task, error: fetchError } = await supabase
-      .from("todos")
-      .select("*")
-      .eq("id", taskId)
-      .single();
-
-    if (fetchError) {
-      console.log(fetchError);
-      return;
-    }
-
-    // Insert into completed_tasks table
-    const { error: insertError } = await supabase
-      .from("completed_tasks")
-      .insert([{ task_id: taskId, user_id: task.user_id }]);
-
-    if (insertError) {
-      console.log(insertError);
-      return;
-    }
-
-    // Mark task as completed in the todos table
-    const { error: updateError } = await supabase
-      .from("todos")
-      .update({ completed: true })
-      .eq("id", taskId);
-
-    if (updateError) {
-      console.log(updateError);
-      return;
-    }
-
-    setTasks(tasks.filter((task) => task.id !== taskId));
-  };
-
-  // Restore task
-
-  const restoreTask = async (taskId) => {
-    const { data: completedTask, error: fetchCompletedError } = await supabase
-      .from("completed_tasks")
-      .select("*")
-      .eq("task_id", taskId)
-      .single();
-
-    if (fetchCompletedError) {
-      console.log(fetchCompletedError);
-      return;
-    }
-
-    // Remove from completed_tasks
-    const { error: deleteError } = await supabase
-      .from("completed_tasks")
-      .delete()
-      .eq("task_id", taskId);
-
-    if (deleteError) {
-      console.log(deleteError);
-      return;
-    }
-
-    // Mark task as not completed in todos table
-    const { error: restoreError } = await supabase
-      .from("todos")
-      .update({ completed: false })
-      .eq("id", taskId);
-
-    if (restoreError) {
-      console.log(restoreError);
-      return;
-    }
-  };
-
-  // fetch completed tasks
-  const fetchCompletedTasks = async (userId) => {
-    const { data, error } = await supabase
-      .from("completed_tasks")
-      .select("*, todos(text, completed)")
-      .eq("user_id", userId);
-
-    if (error) {
-      console.error("Error fetching completed tasks:", error);
-      return;
-    }
-
-    setCompletedTasks(data);
-  };
-
-  useEffect(() => {
-    if (user) {
-      fetchCompletedTasks(user.id);
-    }
-  }, [user]);
 
   return (
     <div className="container">
@@ -226,55 +180,58 @@ export default function Home() {
           Add
         </button>
       </div>
+      <h2>Active Tasks</h2>
       <ul className="list">
-        {tasks.map((task) => (
-          <li
-            key={task.id}
-            className={`task ${expandedTaskId === task.id ? "expanded" : ""}`}
-          >
-            <div
-              className="task-preview"
-              onClick={() => handleToggleExpand(task.id)}
+        {tasks
+          .filter((task) => !task.completed)
+          .map((task) => (
+            <li
+              key={task.id}
+              className={`task ${expandedTaskId === task.id ? "expanded" : ""}`}
             >
-              <span className={task.completed ? "completed" : ""}>
-                {task.text}
-              </span>
-              <button
-                className="complete-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  markAsCompleted(task.id);
-                  toggleTask(task.id, task.completed);
-                }}
+              <div
+                className="task-preview"
+                onClick={() => handleToggleExpand(task.id)}
               >
-                {task.completed ? "Add to List" : "Complete"}
-              </button>
-              <button
-                className="remove-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  removeTask(task.id);
-                }}
-              >
-                ✖
-              </button>
-            </div>
-
-            {expandedTaskId === task.id && (
-              <div className="task-details">
-                <div>
-                  <h4>Title</h4>
-                  <p className="full-title">{task.text}</p>
-                </div>
-                <div>
-                  <h4>Description</h4>
-                  <p className="task-description">{task.description}</p>
-                </div>
+                <span className={task.completed ? "completed" : ""}>
+                  {task.text}
+                </span>
+                <button
+                  className="complete-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    markTaskAsComplete(task.id);
+                  }}
+                >
+                  {task.completed ? "Add to List" : "Complete"}
+                </button>
+                <button
+                  className="remove-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeTask(task.id);
+                  }}
+                >
+                  ✖
+                </button>
               </div>
-            )}
-          </li>
-        ))}
+
+              {expandedTaskId === task.id && (
+                <div className="task-details">
+                  <div>
+                    <h4>Title</h4>
+                    <p className="full-title">{task.text}</p>
+                  </div>
+                  <div>
+                    <h4>Description</h4>
+                    <p className="task-description">{task.description}</p>
+                  </div>
+                </div>
+              )}
+            </li>
+          ))}
       </ul>
+
       <div className="completed-tasks-container">
         <h2 className="completed-tasks-header">Completed Tasks</h2>
         <ul className="completed-tasks-list">
@@ -287,7 +244,8 @@ export default function Home() {
                 <p>
                   {task.todos.completed ? "Completed" : "Not completed yet"}
                 </p>
-                <button onClick={() => restoreTask(task.todos.id)}>
+                <button onClick={() => restoreTask(task.id)}>
+                  {" "}
                   Restore to Main List
                 </button>
               </li>
