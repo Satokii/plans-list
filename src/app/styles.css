@@ -75,11 +75,13 @@
 }
 
 /* Input */
-.inputContainer {
+.input-container {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
   width: 100%;
-  max-width: 450px;
+  max-width: 500px;
+  padding: 12px;
+  margin: 0 auto;
   background: rgba(255, 255, 255, 0.9);
   padding: 10px;
   border-radius: 12px;
@@ -89,9 +91,10 @@
 
 .input {
   flex: 1;
-  padding: 12px;
+  padding: 8px 12px;
+  margin-right: 12px;
   font-size: 16px;
-  border: none;
+  border: 1px solid #ddd;
   border-radius: 8px;
   outline: none;
   background: #fff4e6;
@@ -105,17 +108,19 @@
 }
 
 /* Add Task Button */
-.addButton {
+.add-button {
   background: #ff6f00;
+  font-family: "Indie Flower", cursive;
   color: white;
   font-size: 16px;
-  padding: 12px 15px;
+  padding: 8px 16px;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
-.addButton:hover {
+.add-button:hover {
   background: #e65c00;
   transform: scale(1.1);
 }
@@ -293,8 +298,21 @@
     font-size: 36px;
   }
 
-  .inputContainer {
-    max-width: 90%;
+  .input-container {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 85%;
+  }
+
+  .input {
+    margin-bottom: 10px;
+    margin-right: 0;
+    font-size: 15px;
+  }
+
+  .add-button {
+    font-size: 14px;
+    padding: 5px 16px;
   }
 
   .list {

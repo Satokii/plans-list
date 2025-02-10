@@ -94,7 +94,7 @@ export default function Home() {
       <button className="log-out-btn" onClick={handleSignOut}>
         Log Out
       </button>
-      <div className="inputContainer">
+      <div className="input-container">
         <input
           type="text"
           value={input}
@@ -102,7 +102,7 @@ export default function Home() {
           placeholder="Add a new task..."
           className="input"
         />
-        <button onClick={addTask} className="addButton">
+        <button onClick={addTask} className="add-button">
           Add
         </button>
       </div>
