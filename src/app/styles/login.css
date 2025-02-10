@@ -1,90 +1,141 @@
 /* Main Background */
 .auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff7f32, #ff8c42);
-  }
-  
-  /* Auth Box Styling */
-  .auth-box {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 350px;
-    border: 2px solid #ff6f00;
-  }
-  
-  /* Title */
-  .auth-box h1 {
-    margin-bottom: 20px;
-    font-size: 28px;
-    font-family: 'Indie Flower', cursive;
-    color: #ff6f00;
-  }
-  
-  /* Inputs Styling */
-  .auth-box input {
-    width: 100%;
-    padding: 12px;
-    margin: 12px 0;
-    border: 1px solid #ff6f00;
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: #fff4e6;
-    color: black;
-  }
-
-  .auth-box input:focus {
-    outline: none;
-    border-color: #ff6f00;
-    box-shadow: 0 0 10px rgba(255, 111, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff7f32, #ff8c42);
 }
-  
-  /* Button Styling */
-  .sign-in-btn, .sign-up-btn {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+
+/* Auth Box Styling */
+.auth-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 350px;
+  border: 2px solid #ff6f00;
+  max-width: 450px;
+  margin: 0 10px;
+}
+
+/* Title */
+.auth-box h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-family: "Indie Flower", cursive;
+  color: #ff6f00;
+}
+
+/* Inputs Styling */
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid #ff6f00;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff4e6;
+  color: black;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.auth-box input:focus {
+  outline: none;
+  border-color: #ff6f00;
+  box-shadow: 0 0 10px rgba(255, 111, 0, 0.7);
+}
+
+/* Button Styling */
+.sign-in-btn,
+.sign-up-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sign-in-btn {
+  background: #ff6f00;
+}
+
+.sign-in-btn:hover {
+  background: #e65c00;
+}
+
+.sign-up-btn {
+  background: #f2a900;
+}
+
+.sign-up-btn:hover {
+  background: #db9a02;
+}
+
+/* Error Styling */
+.auth-error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Rabbit and Adventure Icon */
+.auth-box::before {
+  content: "🐇";
+  font-size: 50px;
+  display: block;
+  margin-bottom: 15px;
+  color: #ff6f00;
+}
+
+/* Mobile (max-width: 600px) */
+@media only screen and (max-width: 600px) {
+  .auth-container {
+    padding: 10px;
   }
 
-  .sign-in-btn {
-    background: #ff6f00;
+  .auth-box {
+    width: 100%; /* Make box take full width on small screens */
+    padding: 1.5rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    margin: 0; /* Remove margin for full-width form */
   }
 
-  .sign-in-btn:hover {
-    background: #e65c00;
+  .auth-box h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
   }
 
-  .sign-up-btn {
-    background: #f2a900;
-  }
-
-  .sign-up-btn:hover {
-    background: #db9a02;
-  }
-  
-  /* Error Styling */
-  .auth-error {
-    color: red;
+  .auth-box input,
+  .auth-box button {
+    padding: 10px;
     font-size: 14px;
-    margin-top: 10px;
   }
-  
-  /* Rabbit and Adventure Icon */
-  .auth-box::before {
-    content: "🐇";
-    font-size: 50px;
-    display: block;
-    margin-bottom: 15px;
-    color: #ff6f00;
+
+  .auth-box input {
+    margin: 7px 0;
   }
+}
+
+/* ----------------------------- */
+/* Tablet (max-width: 768px) */
+@media only screen and (max-width: 768px) {
+  .auth-box {
+    width: 80%;
+    max-width: 400px;
+  }
+
+  .auth-box h1 {
+    font-size: 26px;
+  }
+
+  .auth-box input,
+  .auth-box button {
+    font-size: 15px;
+  }
+}
