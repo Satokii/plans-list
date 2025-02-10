@@ -9,7 +9,7 @@ import "./styles.css";
 export default function Home() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
-  const [description, setDescription] = useState(""); 
+  const [description, setDescription] = useState("");
   const [user, setUser] = useState(null);
   const [expandedTaskId, setExpandedTaskId] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -142,6 +142,10 @@ export default function Home() {
           height={window.innerHeight}
           style={{
             opacity: fadeOut ? 0 : 1,
+            position: "fixed",
+            top: 0,
+            left: 0,
+            zIndex: 9999,
             transition: "opacity 2s ease-out",
           }}
         />
