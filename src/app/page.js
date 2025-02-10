@@ -222,53 +222,54 @@ export default function Home() {
       </ul>
 
       {/* Completed Tasks Section */}
-      <div className="completed-tasks-container">
-        <h2 className="completed-tasks-header">Completed Tasks</h2>
-        <ul className="completed-tasks-list">
-          {tasks.filter((task) => task.completed).length === 0 ? (
-            <p>No completed tasks yet!</p>
-          ) : (
-            tasks
-              .filter((task) => task.completed)
-              .map((task) => (
-                <li
-                  key={task.id}
-                  className={`completed-task ${
-                    expandedTaskId === task.id ? "expanded" : ""
-                  }`}
+      {/* <div className="completed-tasks-container"> */}
+      <h2 className="completed-tasks-header">Completed Tasks</h2>
+      <ul className="completed-tasks-list">
+        {tasks.filter((task) => task.completed).length === 0 ? (
+          <p className="no-tasks">No completed tasks yet!</p>
+        ) : (
+          tasks
+            .filter((task) => task.completed)
+            .map((task) => (
+              <li
+                key={task.id}
+                className={`completed-task ${
+                  expandedTaskId === task.id ? "completed-task-expanded" : ""
+                }`}
+              >
+                <div
+                  className="completed-task-preview"
+                  onClick={() => handleToggleExpand(task.id)}
                 >
-                  <div
-                    className="task-preview"
-                    onClick={() => handleToggleExpand(task.id)}
+                  <span className="completed-task-text">{task.text}</span>
+                  <button
+                    className="restore-btn"
+                    onClick={() => restoreTask(task.id)}
                   >
-                    <span className="task-text">{task.text}</span>
-                    <button
-                      className="restore-btn"
-                      onClick={() => restoreTask(task.id)}
-                    >
-                      Restore to Main List
-                    </button>
-                  </div>
+                    Restore
+                  </button>
+                </div>
 
-                  {expandedTaskId === task.id && (
-                    <div className="task-details">
-                      <div>
-                        <h4>Title</h4>
-                        <p className="full-title">{task.text}</p>
-                      </div>
-                      <div>
-                        <h4>Description</h4>
-                        <p className="task-description">
-                          {task.description || "No description provided"}
-                        </p>
-                      </div>
+                {/* Expanded Task Details */}
+                {expandedTaskId === task.id && (
+                  <div className="completed-task-details">
+                    <div>
+                      <h4>Title</h4>
+                      <p className="completed-full-title">{task.text}</p>
                     </div>
-                  )}
-                </li>
-              ))
-          )}
-        </ul>
-      </div>
+                    <div>
+                      <h4>Description</h4>
+                      <p className="completed-task-description">
+                        {task.description || "No description provided"}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </li>
+            ))
+        )}
+      </ul>
     </div>
+    // </div>
   );
 }
