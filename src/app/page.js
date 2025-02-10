@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+import Confetti from "react-confetti";
 import "./styles.css";
 
 export default function Home() {
@@ -11,6 +12,8 @@ export default function Home() {
   const [user, setUser] = useState(null);
   const [taskDescription, setTaskDescription] = useState("");
   const [expandedTaskId, setExpandedTaskId] = useState(null);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
 
   const router = useRouter();
 
@@ -68,6 +71,15 @@ export default function Home() {
       .update({ completed: !completed })
       .match({ id });
     if (!error) {
+      setShowConfetti(true);
+      setFadeOut(false);
+
+      setTimeout(() => {
+        setFadeOut(true);
+      }, 2500);
+
+      setTimeout(() => setShowConfetti(false), 4000);
+
       setTasks(
         tasks.map((task) =>
           task.id === id ? { ...task, completed: !completed } : task
@@ -90,6 +102,17 @@ export default function Home() {
 
   return (
     <div className="container">
+      {showConfetti && (
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          style={{
+            opacity: fadeOut ? 0 : 1,
+            transition: "opacity 2s ease-out",
+          }}
+        />
+      )}
+
       <h1 className="title">To-Do List</h1>
       <button className="log-out-btn" onClick={handleSignOut}>
         Log Out
