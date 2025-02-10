@@ -160,16 +160,16 @@
   padding: 0;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
+@keyframes slideInFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 
 .task,
 .completed-task {
@@ -187,7 +187,7 @@
   cursor: pointer;
   overflow: hidden;
   min-height: 50px;
-  animation: slideIn 0.5s ease-out;
+  animation: slideInFromTop 0.7s ease-out;
 }
 
 .completed-task {
