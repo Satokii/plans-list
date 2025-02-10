@@ -63,7 +63,7 @@ export default function Home() {
   };
 
   const handleToggleExpand = (taskId) => {
-    setExpandedTaskId(expandedTaskId === taskId ? null : taskId);
+    setExpandedTaskId((prevId) => (prevId === taskId ? null : taskId));
   };
 
   const markTaskAsComplete = async (taskId) => {
@@ -83,6 +83,13 @@ export default function Home() {
       console.error("Error updating task:", error);
       return;
     }
+
+    setShowConfetti(true);
+    setFadeOut(false);
+    setTimeout(() => {
+      setFadeOut(true);
+    }, 2500);
+    setTimeout(() => setShowConfetti(false), 4000);
 
     setTasks(
       tasks.map((task) =>
@@ -153,6 +160,7 @@ export default function Home() {
 
   return (
     <div className="container">
+      {/* Confetti Effect */}
       {showConfetti && (
         <Confetti
           width={window.innerWidth}
@@ -168,6 +176,8 @@ export default function Home() {
       <button className="log-out-btn" onClick={handleSignOut}>
         Log Out
       </button>
+
+      {/* Input for new tasks */}
       <div className="input-container">
         <input
           type="text"
@@ -180,6 +190,8 @@ export default function Home() {
           Add
         </button>
       </div>
+
+      {/* Active Tasks Section */}
       <h2>Active Tasks</h2>
       <ul className="list">
         {tasks
@@ -193,9 +205,9 @@ export default function Home() {
                 className="task-preview"
                 onClick={() => handleToggleExpand(task.id)}
               >
-                <span className={task.completed ? "completed" : ""}>
-                  {task.text}
-                </span>
+                <span className="task-text">{task.text}</span>
+
+                {/* Complete Task Button */}
                 <button
                   className="complete-btn"
                   onClick={(e) => {
@@ -203,8 +215,10 @@ export default function Home() {
                     markTaskAsComplete(task.id);
                   }}
                 >
-                  {task.completed ? "Add to List" : "Complete"}
+                  Complete
                 </button>
+
+                {/* Remove Task Button */}
                 <button
                   className="remove-btn"
                   onClick={(e) => {
@@ -216,6 +230,7 @@ export default function Home() {
                 </button>
               </div>
 
+              {/* Expand Task Details */}
               {expandedTaskId === task.id && (
                 <div className="task-details">
                   <div>
@@ -224,7 +239,9 @@ export default function Home() {
                   </div>
                   <div>
                     <h4>Description</h4>
-                    <p className="task-description">{task.description}</p>
+                    <p className="task-description">
+                      {task.description || "No description provided"}
+                    </p>
                   </div>
                 </div>
               )}
@@ -232,24 +249,52 @@ export default function Home() {
           ))}
       </ul>
 
+      {/* Completed Tasks Section */}
       <div className="completed-tasks-container">
         <h2 className="completed-tasks-header">Completed Tasks</h2>
         <ul className="completed-tasks-list">
-          {completedTasks.length === 0 ? (
+          {tasks.filter((task) => task.completed).length === 0 ? (
             <p>No completed tasks yet!</p>
           ) : (
-            completedTasks.map((task) => (
-              <li key={task.id} className="completed-task">
-                <h4>{task.todos.text}</h4>
-                <p>
-                  {task.todos.completed ? "Completed" : "Not completed yet"}
-                </p>
-                <button onClick={() => restoreTask(task.id)}>
-                  {" "}
-                  Restore to Main List
-                </button>
-              </li>
-            ))
+            tasks
+              .filter((task) => task.completed)
+              .map((task) => (
+                <li
+                  key={task.id}
+                  className={`completed-task ${
+                    expandedTaskId === task.id ? "expanded" : ""
+                  }`}
+                >
+                  <div
+                    className="task-preview"
+                    onClick={() => handleToggleExpand(task.id)}
+                  >
+                    <span className="task-text">{task.text}</span>
+                    <button
+                      className="restore-btn"
+                      onClick={() => restoreTask(task.id)}
+                    >
+                      Restore to Main List
+                    </button>
+                  </div>
+
+                  {/* Expand Task Details for Completed Tasks */}
+                  {expandedTaskId === task.id && (
+                    <div className="task-details">
+                      <div>
+                        <h4>Title</h4>
+                        <p className="full-title">{task.text}</p>
+                      </div>
+                      <div>
+                        <h4>Description</h4>
+                        <p className="task-description">
+                          {task.description || "No description provided"}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </li>
+              ))
           )}
         </ul>
       </div>
