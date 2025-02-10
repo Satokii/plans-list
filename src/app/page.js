@@ -100,6 +100,81 @@ export default function Home() {
     router.push("/login");
   };
 
+  // Mark task as complete
+
+  const markAsCompleted = async (taskId) => {
+    const { data: task, error: fetchError } = await supabase
+      .from("todos")
+      .select("*")
+      .eq("id", taskId)
+      .single();
+
+    if (fetchError) {
+      console.log(fetchError);
+      return;
+    }
+
+    // Insert into completed_tasks table
+    const { error: insertError } = await supabase
+      .from("completed_tasks")
+      .insert([{ task_id: taskId, user_id: task.user_id }]);
+
+    if (insertError) {
+      console.log(insertError);
+      return;
+    }
+
+    // Mark task as completed in the todos table
+    const { error: updateError } = await supabase
+      .from("todos")
+      .update({ completed: true })
+      .eq("id", taskId);
+
+    if (updateError) {
+      console.log(updateError);
+      return;
+    }
+
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
+
+  // Restore task
+
+  const restoreTask = async (taskId) => {
+    const { data: completedTask, error: fetchCompletedError } = await supabase
+      .from("completed_tasks")
+      .select("*")
+      .eq("task_id", taskId)
+      .single();
+
+    if (fetchCompletedError) {
+      console.log(fetchCompletedError);
+      return;
+    }
+
+    // Remove from completed_tasks
+    const { error: deleteError } = await supabase
+      .from("completed_tasks")
+      .delete()
+      .eq("task_id", taskId);
+
+    if (deleteError) {
+      console.log(deleteError);
+      return;
+    }
+
+    // Mark task as not completed in todos table
+    const { error: restoreError } = await supabase
+      .from("todos")
+      .update({ completed: false })
+      .eq("id", taskId);
+
+    if (restoreError) {
+      console.log(restoreError);
+      return;
+    }
+  };
+
   return (
     <div className="container">
       {showConfetti && (
@@ -146,6 +221,7 @@ export default function Home() {
                 className="complete-btn"
                 onClick={(e) => {
                   e.stopPropagation();
+                  markAsCompleted(task.id);
                   toggleTask(task.id, task.completed);
                 }}
               >
