@@ -1,8 +1,10 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+
+import "../styles/login.css";
 
 export default function AuthPage() {
   const [email, setEmail] = useState("");
@@ -12,40 +14,51 @@ export default function AuthPage() {
 
   const handleSignUp = async () => {
     setError(null);
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
     });
 
     if (error) {
-      setError(error.message);
+      setError("Enter your email and create a password!");
     } else {
       alert("Check your email for a confirmation link!");
     }
   };
 
   const handleSignIn = async () => {
-    const { user, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
     if (error) setError(error.message);
     else router.push("/");
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    router.push("/login");
-  };
-
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
-      <h1>Login / Register</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <br />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <br />
-      <button onClick={handleSignIn}>Sign In</button>
-      <button onClick={handleSignUp}>Sign Up</button>
-      <button onClick={handleSignOut}>Sign Out</button>
+    <div className="auth-container">
+      <div className="auth-box">
+        <h1>Start Your Adventure</h1>
+        {error && <p className="auth-error">{error}</p>}
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button className="sign-in-btn" onClick={handleSignIn}>
+          Login
+        </button>
+        <button className="sign-up-btn" onClick={handleSignUp}>
+          Sign Up
+        </button>
+      </div>
     </div>
   );
 }
