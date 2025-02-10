@@ -18,7 +18,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #ff7f32, #ff914d);
   font-family: "Indie Flower", cursive;
-  padding: 20px;
+  padding: 50px 20px;
   animation: fadeIn 0.8s ease-in-out;
 }
 
@@ -52,21 +52,26 @@
 
 /* Log Out Button */
 .log-out-btn {
-  background: #ff6f00;
-  color: white;
-  font-size: 18px;
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  background: #ff4500;
   font-family: "Indie Flower", cursive;
-  padding: 10px 15px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s ease;
-  margin: 10px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .log-out-btn:hover {
-  background: #e65c00;
+  background: #e63e00;
   transform: scale(1.05);
+  box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Input */

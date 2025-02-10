@@ -76,7 +76,7 @@ export default function Home() {
   return (
     <div className="container">
       <h1 className="title">To-Do List</h1>
-      <button className="log-out-btn" onClick={handleSignOut}>Log out</button>
+      <button className="log-out-btn" onClick={handleSignOut}>Log Out</button>
       <div className="inputContainer">
         <input
           type="text"
