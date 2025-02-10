@@ -9,6 +9,9 @@ export default function Home() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
   const [user, setUser] = useState(null);
+  const [taskDescription, setTaskDescription] = useState("");
+  const [expandedTaskId, setExpandedTaskId] = useState(null);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -38,13 +41,25 @@ export default function Home() {
     if (!user || input.trim() === "") return;
     const { data, error } = await supabase
       .from("todos")
-      .insert([{ text: input, completed: false, user_id: user.id }])
+      .insert([
+        {
+          text: input,
+          description: taskDescription,
+          completed: false,
+          user_id: user.id,
+        },
+      ])
       .select();
 
     if (!error) {
       setTasks([data[0], ...tasks]);
       setInput("");
+      setTaskDescription("");
     }
+  };
+
+  const handleToggleExpand = (taskId) => {
+    setExpandedTaskId(expandedTaskId === taskId ? null : taskId);
   };
 
   const toggleTask = async (id, completed) => {
@@ -76,7 +91,9 @@ export default function Home() {
   return (
     <div className="container">
       <h1 className="title">To-Do List</h1>
-      <button className="log-out-btn" onClick={handleSignOut}>Log Out</button>
+      <button className="log-out-btn" onClick={handleSignOut}>
+        Log Out
+      </button>
       <div className="inputContainer">
         <input
           type="text"
@@ -91,19 +108,49 @@ export default function Home() {
       </div>
       <ul className="list">
         {tasks.map((task) => (
-          <li key={task.id} className="task">
-            <span className={task.completed ? "completed" : ""}>
-              {task.text}
-            </span>
-            <button className="complete-btn" onClick={() => toggleTask(task.id, task.completed)}>
-              {task.completed ? "Add to List" : "Complete"}
-            </button>
-            <button
-              onClick={() => removeTask(task.id)}
-              className="remove-btn"
+          <li
+            key={task.id}
+            className={`task ${expandedTaskId === task.id ? "expanded" : ""}`}
+          >
+            <div
+              className="task-preview"
+              onClick={() => handleToggleExpand(task.id)}
             >
-              ✖
-            </button>
+              <span className={task.completed ? "completed" : ""}>
+                {task.text}
+              </span>
+              <button
+                className="complete-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleTask(task.id, task.completed);
+                }}
+              >
+                {task.completed ? "Add to List" : "Complete"}
+              </button>
+              <button
+                className="remove-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removeTask(task.id);
+                }}
+              >
+                ✖
+              </button>
+            </div>
+
+            {expandedTaskId === task.id && (
+              <div className="task-details">
+                <div>
+                  <h4>Title</h4>
+                  <p className="full-title">{task.text}</p>
+                </div>
+                <div>
+                  <h4>Description</h4>
+                  <p className="task-description">{task.description}</p>
+                </div>
+              </div>
+            )}
           </li>
         ))}
       </ul>

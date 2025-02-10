@@ -142,8 +142,8 @@
 
 .task {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
   background: white;
   color: black;
   padding: 12px;
@@ -152,10 +152,17 @@
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
   font-size: 18px;
   transition: 0.3s ease-in-out;
-  width: 100%;
-  animation: slideIn 0.5s ease-out;
-  min-height: 50px;
+  cursor: pointer;
   overflow: hidden;
+  min-height: 50px;
+  animation: slideIn 0.5s ease-out;
+}
+
+.task-preview {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .task span {
@@ -165,7 +172,56 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 60%; 
+  max-width: 60%;
+}
+
+.task-details {
+  background: #fff9e5;
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 12px;
+  transition: 0.3s ease-in-out;
+}
+
+.task-details div {
+  margin-bottom: 12px;
+}
+
+.task-details h4 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff6f00;
+  margin-bottom: 6px;
+}
+
+.full-title {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #333;
+  word-wrap: break-word;
+}
+
+.task-description {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.task-details p {
+  padding: 8px 0;
+  margin: 0;
+}
+
+.task-details div:last-child {
+  margin-bottom: 0;
+}
+
+.task-details h4:hover {
+  color: #ff8f00;
+  cursor: pointer;
 }
 
 /* Completed Tasks */
@@ -195,8 +251,8 @@
   margin-left: auto;
 }
 .complete-btn:hover {
-    background-color: rgb(3, 93, 3);
-  }
+  background-color: rgb(3, 93, 3);
+}
 
 @keyframes wiggle {
   0%,
@@ -241,7 +297,7 @@
     max-width: 90%;
   }
 
-  .task {
+  .task-preview {
     font-size: 16px;
     flex-wrap: wrap;
   }
@@ -257,5 +313,26 @@
     width: 100%;
     margin-top: 5px;
     margin-left: 0;
+  }
+
+  .task-details {
+    padding: 12px;
+    margin-top: 12px;
+  }
+ 
+  .task-details h4 {
+    font-size: 16px;
+  }
+  
+  .full-title {
+    font-size: 14px;
+  }
+  
+  .task-description {
+    font-size: 13px;
+  }
+  
+  .task-details p {
+    padding: 4px 0;
   }
 }
