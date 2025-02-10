@@ -1,28 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import "./styles.css";
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
 
-  const addTask = () => {
-    if (input.trim() !== "") {
-      setTasks([...tasks, { text: input, completed: false }]);
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    const { data, error } = await supabase
+      .from("todos")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) console.error(error);
+    else setTasks(data);
+  };
+
+  const addTask = async () => {
+    if (input.trim() === "") return;
+    const { data, error } = await supabase
+      .from("todos")
+      .insert([{ text: input, completed: false }])
+      .select();
+      
+    if (!error) {
+      setTasks([data[0], ...tasks]);
       setInput("");
     }
   };
 
-  const toggleTask = (index) => {
-    const newTasks = tasks.map((task, i) =>
-      i === index ? { ...task, completed: !task.completed } : task
-    );
-    setTasks(newTasks);
+  const toggleTask = async (id, completed) => {
+    const { error } = await supabase
+      .from("todos")
+      .update({ completed: !completed })
+      .match({ id });
+    if (!error) {
+      setTasks(
+        tasks.map((task) =>
+          task.id === id ? { ...task, completed: !completed } : task
+        )
+      );
+    }
   };
-
-  const removeTask = (index) => {
-    setTasks(tasks.filter((_, i) => i !== index));
+  const removeTask = async (id) => {
+    const { error } = await supabase.from("todos").delete().match({ id });
+    if (!error) {
+      setTasks(tasks.filter((task) => task.id !== id));
+    }
   };
 
   return (
@@ -41,15 +70,15 @@ export default function Home() {
         </button>
       </div>
       <ul className="list">
-        {tasks.map((task, index) => (
-          <li key={index} className="task">
+        {tasks.map((task) => (
+          <li key={task.id} className="task">
             <span className={task.completed ? "completed" : ""}>
               {task.text}
             </span>
-            <button onClick={() => toggleTask(index)}>
+            <button onClick={() => toggleTask(task.id, task.completed)}>
               {task.completed ? "Add to List" : "Complete"}
             </button>
-            <button onClick={() => removeTask(index)} className="removeButton">
+            <button onClick={() => removeTask(task.id)} className="removeButton">
               ✖
             </button>
           </li>
