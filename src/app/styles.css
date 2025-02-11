@@ -317,6 +317,7 @@
 .task button,
 .completed-task button {
   flex-shrink: 0;
+  color: white;
   min-width: 100px;
   padding: 8px 12px;
   font-size: 14px;
@@ -443,7 +444,6 @@
   .task button,
   .completed-task button {
     padding: 6px 10px;
-    font-size: 12px;
     width: 100%;
     margin-top: 5px;
     margin-left: 0;
