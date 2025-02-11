@@ -87,19 +87,19 @@ export default function Home() {
     }
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    router.push("/login");
-  };
+  // const handleSignOut = async () => {
+  //   await supabase.auth.signOut();
+  //   router.push("/login");
+  // };
 
   return (
     <div className="container">
       {showConfetti && <ConfettiEffect fadeOut={fadeOut} />}
 
       <h1 className="title">To-Do List</h1>
-      <button className="log-out-btn" onClick={handleSignOut}>
+      {/* <button className="log-out-btn" onClick={handleSignOut}>
         Log Out
-      </button>
+      </button> */}
 
       <TaskInput
         tasks={tasks}
