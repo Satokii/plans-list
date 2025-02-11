@@ -7,6 +7,7 @@ import ConfettiEffect from "@/components/confetti-effect";
 import TaskInput from "@/components/task-input";
 import ActiveTasks from "@/components/active-tasks";
 import CompletedTasks from "@/components/completed-tasks";
+import LogoutButton from "@/components/logout-button";
 
 import "./styles.css";
 
@@ -97,6 +98,7 @@ export default function Home() {
       {showConfetti && <ConfettiEffect fadeOut={fadeOut} />}
 
       <h1 className="title">To-Do List</h1>
+      <LogoutButton />
       {/* <button className="log-out-btn" onClick={handleSignOut}>
         Log Out
       </button> */}
