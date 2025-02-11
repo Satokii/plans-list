@@ -59,6 +59,7 @@ export default function CompletedTasks({
                     alt="expand-icon"
                   />
                   <span className="completed-task-text">{task.text}</span>
+
                   <button
                     className="restore-btn"
                     onClick={(e) => {
@@ -66,7 +67,17 @@ export default function CompletedTasks({
                       restoreTask(task.id);
                     }}
                   >
-                    Add Back To List
+                    🔄 Add Back
+                  </button>
+
+                  <button
+                    className="remove-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeTask(task.id);
+                    }}
+                  >
+                    🗑️ Delete
                   </button>
                 </div>
 

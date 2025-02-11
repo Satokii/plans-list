@@ -278,7 +278,7 @@
 
 /* Complete & Remove Buttons */
 .task button,
-.restore-btn {
+.completed-task button {
   flex-shrink: 0;
   min-width: 100px;
   padding: 8px 12px;
@@ -331,7 +331,6 @@
 
 .restore-btn:hover {
   background: #e68900;
-  animation: wiggle 0.2s ease-in-out;
 }
 
 .expand-task-icon {
