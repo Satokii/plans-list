@@ -27,7 +27,7 @@ export default function ActiveTasks({
                   className="expand-task-icon"
                   src={ExpandIcon}
                   alt="expand-icon"
-                ></Image>
+                />
                 <span className="task-text">{task.text}</span>
 
                 <button

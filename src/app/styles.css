@@ -341,7 +341,8 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.task.expanded .expand-task-icon {
+.task.expanded .expand-task-icon,
+.completed-task.completed-task-expanded .expand-task-icon {
   transform: rotate(180deg);
 }
 
