@@ -80,30 +80,30 @@ export default function Home() {
     );
   };
 
-  const restoreTask = async (taskId) => {
-    if (!user || !user.id) {
-      console.error("User is not logged in or user ID is missing.");
-      return;
-    }
+  // const restoreTask = async (taskId) => {
+  //   if (!user || !user.id) {
+  //     console.error("User is not logged in or user ID is missing.");
+  //     return;
+  //   }
 
-    const { error } = await supabase
-      .from("todos")
-      .update({ completed: false })
-      .eq("id", taskId)
-      .eq("user_id", user.id)
-      .select();
+  //   const { error } = await supabase
+  //     .from("todos")
+  //     .update({ completed: false })
+  //     .eq("id", taskId)
+  //     .eq("user_id", user.id)
+  //     .select();
 
-    if (error) {
-      console.error("Error restoring task:", error);
-      return;
-    }
+  //   if (error) {
+  //     console.error("Error restoring task:", error);
+  //     return;
+  //   }
 
-    setTasks(
-      tasks.map((task) =>
-        task.id === taskId ? { ...task, completed: false } : task
-      )
-    );
-  };
+  //   setTasks(
+  //     tasks.map((task) =>
+  //       task.id === taskId ? { ...task, completed: false } : task
+  //     )
+  //   );
+  // };
 
   const removeTask = async (id) => {
     const { error } = await supabase.from("todos").delete().match({ id });
@@ -146,9 +146,10 @@ export default function Home() {
 
       <CompletedTasks
         tasks={tasks}
+        setTasks={setTasks}
+        user={user}
         expandedTaskId={expandedTaskId}
         handleToggleExpand={handleToggleExpand}
-        restoreTask={restoreTask}
       />
     </div>
   );

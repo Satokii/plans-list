@@ -1,9 +1,36 @@
+import { supabase } from "@/lib/supabase";
+
 export default function CompletedTasks({
   tasks,
+  setTasks,
+  user,
   expandedTaskId,
   handleToggleExpand,
-  restoreTask,
 }) {
+  const restoreTask = async (taskId) => {
+    if (!user || !user.id) {
+      console.error("User is not logged in or user ID is missing.");
+      return;
+    }
+
+    const { error } = await supabase
+      .from("todos")
+      .update({ completed: false })
+      .eq("id", taskId)
+      .eq("user_id", user.id)
+      .select();
+
+    if (error) {
+      console.error("Error restoring task:", error);
+      return;
+    }
+
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, completed: false } : task
+      )
+    );
+  };
   return (
     <>
       <h2 className="completed-tasks-header">Completed:</h2>
