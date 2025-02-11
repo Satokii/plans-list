@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
-import Confetti from "react-confetti";
+import ConfettiEffect from "@/components/confetti/ConfettiEffect";
 import "./styles.css";
 
 export default function Home() {
@@ -137,18 +137,7 @@ export default function Home() {
   return (
     <div className="container">
       {showConfetti && (
-        <Confetti
-          width={window.innerWidth}
-          height={window.innerHeight}
-          style={{
-            opacity: fadeOut ? 0 : 1,
-            position: "fixed",
-            top: 0,
-            left: 0,
-            zIndex: 9999,
-            transition: "opacity 2s ease-out",
-          }}
-        />
+        <ConfettiEffect fadeOut={fadeOut} />
       )}
 
       <h1 className="title">To-Do List</h1>
