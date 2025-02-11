@@ -73,7 +73,7 @@ export default function ActiveTasks({
                     markTaskAsComplete(task.id);
                   }}
                 >
-                  ✔
+                  ✔ Complete
                 </button>
 
                 <button
@@ -83,7 +83,7 @@ export default function ActiveTasks({
                     removeTask(task.id);
                   }}
                 >
-                  🗑️
+                  🗑️ Delete
                 </button>
               </div>
 
