@@ -48,7 +48,7 @@ export default function ActiveTasks({
     <>
       {tasks.some((task) => !task.completed) ? (
         <>
-          <h2 className="tasks-header">To Do:</h2>
+          <h2 className="tasks-header">Activities:</h2>
           <ul className="list">
             {tasks
               .filter((task) => !task.completed)
