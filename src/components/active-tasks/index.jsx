@@ -1,13 +1,49 @@
 import Image from "next/image";
+import { supabase } from "@/lib/supabase";
 import ExpandIcon from "../../../public/assets/svgs/expand.svg";
 
 export default function ActiveTasks({
   tasks,
+  setTasks,
+  user,
+  setShowConfetti,
+  setFadeOut,
   expandedTaskId,
   handleToggleExpand,
-  markTaskAsComplete,
   removeTask,
 }) {
+  const markTaskAsComplete = async (taskId) => {
+    if (!user || !user.id) {
+      console.error("User is not logged in or user ID is missing.");
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("todos")
+      .update({ completed: true })
+      .eq("id", taskId)
+      .eq("user_id", user.id)
+      .select();
+
+    if (error) {
+      console.error("Error updating task:", error);
+      return;
+    }
+
+    setShowConfetti(true);
+    setFadeOut(false);
+    setTimeout(() => {
+      setFadeOut(true);
+    }, 2500);
+    setTimeout(() => setShowConfetti(false), 4000);
+
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, completed: true } : task
+      )
+    );
+  };
+
   return (
     <>
       <h2 className="tasks-header">To Do:</h2>
