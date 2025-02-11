@@ -33,6 +33,16 @@
   }
 }
 
+@keyframes bounceFlipped {
+  0%,
+  100% {
+    transform: translateY(0) rotateY(180deg);
+  }
+  50% {
+    transform: translateY(-5px) translateX(2px) rotateY(180deg);
+  }
+}
+
 .title {
   font-size: 42px;
   color: white;
@@ -48,6 +58,14 @@
   font-size: 48px;
   margin-right: 10px;
   animation: bounce 1.5s infinite alternate ease-in-out;
+}
+
+.title::after {
+  content: "🐇";
+  font-size: 48px;
+  margin-left: 10px;
+  display: inline-block;
+  animation: bounceFlipped 1.5s infinite alternate ease-in-out;
 }
 
 /* Log Out Button */
@@ -394,6 +412,10 @@
   }
 
   .title::before {
+    font-size: 36px;
+  }
+
+  .title::after {
     font-size: 36px;
   }
 
