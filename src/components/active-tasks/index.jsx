@@ -46,64 +46,74 @@ export default function ActiveTasks({
 
   return (
     <>
-      <h2 className="tasks-header">To Do:</h2>
-      <ul className="list">
-        {tasks
-          .filter((task) => !task.completed)
-          .map((task) => (
-            <li
-              key={task.id}
-              className={`task ${expandedTaskId === task.id ? "expanded" : ""}`}
-            >
-              <div
-                className="task-preview"
-                onClick={() => handleToggleExpand(task.id)}
-              >
-                <Image
-                  className="expand-task-icon"
-                  src={ExpandIcon}
-                  alt="expand-icon"
-                />
-                <span className="task-text">{task.text}</span>
-
-                <button
-                  className="complete-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    markTaskAsComplete(task.id);
-                  }}
+      {tasks.some((task) => !task.completed) ? (
+        <>
+          <h2 className="tasks-header">To Do:</h2>
+          <ul className="list">
+            {tasks
+              .filter((task) => !task.completed)
+              .map((task) => (
+                <li
+                  key={task.id}
+                  className={`task ${
+                    expandedTaskId === task.id ? "expanded" : ""
+                  }`}
                 >
-                  ✔ Complete
-                </button>
+                  <div
+                    className="task-preview"
+                    onClick={() => handleToggleExpand(task.id)}
+                  >
+                    <Image
+                      className="expand-task-icon"
+                      src={ExpandIcon}
+                      alt="expand-icon"
+                    />
+                    <span className="task-text">{task.text}</span>
 
-                <button
-                  className="remove-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    removeTask(task.id);
-                  }}
-                >
-                  🗑️ Delete
-                </button>
-              </div>
+                    <button
+                      className="complete-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        markTaskAsComplete(task.id);
+                      }}
+                    >
+                      ✔
+                    </button>
 
-              {expandedTaskId === task.id && (
-                <div className="task-details">
-                  <div>
-                    <h4>Activity</h4>
-                    <p className="full-title">{task.text}</p>
+                    <button
+                      className="remove-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeTask(task.id);
+                      }}
+                    >
+                      🗑️
+                    </button>
                   </div>
-                  <div>
-                    <h4>Description</h4>
-                    <p className="task-description">
-                      {task.description || "No description provided"}
-                    </p>
-                  </div>
-                </div>
-              )}
-            </li>
-          ))}
-      </ul>
+
+                  {expandedTaskId === task.id && (
+                    <div className="task-details">
+                      <div>
+                        <h4>Title</h4>
+                        <p className="full-title">{task.text}</p>
+                      </div>
+                      <div>
+                        <h4>Description</h4>
+                        <p className="task-description">
+                          {task.description || "No description provided"}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </li>
+              ))}
+          </ul>
+        </>
+      ) : (
+        tasks.some((task) => task.completed) && (
+          <p className="no-active-tasks-message">No current activities!</p>
+        )
+      )}
     </>
   );
 }

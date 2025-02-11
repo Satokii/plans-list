@@ -36,71 +36,75 @@ export default function CompletedTasks({
   };
   return (
     <>
-      <h2 className="completed-tasks-header">Completed:</h2>
-      <ul className="completed-tasks-list">
-        {tasks.filter((task) => task.completed).length === 0 ? (
-          <p className="no-tasks">No completed activities yet!</p>
-        ) : (
-          tasks
-            .filter((task) => task.completed)
-            .map((task) => (
-              <li
-                key={task.id}
-                className={`completed-task ${
-                  expandedTaskId === task.id ? "completed-task-expanded" : ""
-                }`}
-              >
-                <div
-                  className="completed-task-preview"
-                  onClick={() => handleToggleExpand(task.id)}
+      {tasks.some((task) => task.completed) ? (
+        <>
+          <h2 className="completed-tasks-header">Completed:</h2>
+          <ul className="completed-tasks-list">
+            {tasks
+              .filter((task) => task.completed)
+              .map((task) => (
+                <li
+                  key={task.id}
+                  className={`completed-task ${
+                    expandedTaskId === task.id ? "completed-task-expanded" : ""
+                  }`}
                 >
-                  <Image
-                    className="expand-task-icon"
-                    src={ExpandIcon}
-                    alt="expand-icon"
-                  />
-                  <span className="completed-task-text">{task.text}</span>
-
-                  <button
-                    className="restore-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      restoreTask(task.id);
-                    }}
+                  <div
+                    className="completed-task-preview"
+                    onClick={() => handleToggleExpand(task.id)}
                   >
-                    🔄 Add Back
-                  </button>
+                    <Image
+                      className="expand-task-icon"
+                      src={ExpandIcon}
+                      alt="expand-icon"
+                    />
+                    <span className="completed-task-text">{task.text}</span>
 
-                  <button
-                    className="remove-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      removeTask(task.id);
-                    }}
-                  >
-                    🗑️ Delete
-                  </button>
-                </div>
+                    <button
+                      className="restore-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        restoreTask(task.id);
+                      }}
+                    >
+                      🔄 Add Back
+                    </button>
 
-                {/* Expanded Task Details */}
-                {expandedTaskId === task.id && (
-                  <div className="completed-task-details">
-                    <div>
-                      <h4>Activity</h4>
-                      <p className="completed-full-title">{task.text}</p>
-                    </div>
-                    <div>
-                      <h4>Description</h4>
-                      <p className="completed-task-description">
-                        {task.description || "No description provided"}
-                      </p>
-                    </div>
+                    <button
+                      className="remove-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeTask(task.id);
+                      }}
+                    >
+                      🗑️ Delete
+                    </button>
                   </div>
-                )}
-              </li>
-            ))
-        )}
-      </ul>
+
+                  {/* Expanded Task Details */}
+                  {expandedTaskId === task.id && (
+                    <div className="completed-task-details">
+                      <div>
+                        <h4>Activity</h4>
+                        <p className="completed-full-title">{task.text}</p>
+                      </div>
+                      <div>
+                        <h4>Description</h4>
+                        <p className="completed-task-description">
+                          {task.description || "No description provided"}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </li>
+              ))}
+          </ul>
+        </>
+      ) : (
+        tasks.some((task) => !task.completed) && (
+          <p className="no-completed-tasks-message">No completed tasks</p>
+        )
+      )}
     </>
   );
 }
