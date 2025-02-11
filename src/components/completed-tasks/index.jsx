@@ -3,7 +3,6 @@ export default function CompletedTasks({
   expandedTaskId,
   handleToggleExpand,
   restoreTask,
-  
 }) {
   return (
     <>
@@ -28,7 +27,10 @@ export default function CompletedTasks({
                   <span className="completed-task-text">{task.text}</span>
                   <button
                     className="restore-btn"
-                    onClick={() => restoreTask(task.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      restoreTask(task.id);
+                    }}
                   >
                     Add Back To List
                   </button>
