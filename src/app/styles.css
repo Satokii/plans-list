@@ -161,15 +161,15 @@
 }
 
 @keyframes slideInFromTop {
-    from {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 .task,
 .completed-task {
@@ -332,6 +332,17 @@
 .restore-btn:hover {
   background: #e68900;
   animation: wiggle 0.2s ease-in-out;
+}
+
+.expand-task-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.task.expanded .expand-task-icon {
+  transform: rotate(180deg);
 }
 
 /* MEDIA QUERIES */
