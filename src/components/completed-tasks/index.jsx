@@ -8,6 +8,7 @@ export default function CompletedTasks({
   user,
   expandedTaskId,
   handleToggleExpand,
+  removeTask,
 }) {
   const restoreTask = async (taskId) => {
     if (!user || !user.id) {
@@ -38,7 +39,7 @@ export default function CompletedTasks({
       <h2 className="completed-tasks-header">Completed:</h2>
       <ul className="completed-tasks-list">
         {tasks.filter((task) => task.completed).length === 0 ? (
-          <p className="no-tasks">No completed tasks yet!</p>
+          <p className="no-tasks">No completed activities yet!</p>
         ) : (
           tasks
             .filter((task) => task.completed)
@@ -85,7 +86,7 @@ export default function CompletedTasks({
                 {expandedTaskId === task.id && (
                   <div className="completed-task-details">
                     <div>
-                      <h4>Title</h4>
+                      <h4>Activity</h4>
                       <p className="completed-full-title">{task.text}</p>
                     </div>
                     <div>

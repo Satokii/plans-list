@@ -107,6 +107,7 @@ export default function Home() {
         user={user}
         expandedTaskId={expandedTaskId}
         handleToggleExpand={handleToggleExpand}
+        removeTask={removeTask}
       />
     </div>
   );

@@ -90,7 +90,7 @@ export default function ActiveTasks({
               {expandedTaskId === task.id && (
                 <div className="task-details">
                   <div>
-                    <h4>Title</h4>
+                    <h4>Activity</h4>
                     <p className="full-title">{task.text}</p>
                   </div>
                   <div>
