@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
-import ConfettiEffect from "@/components/confetti/ConfettiEffect";
+import ConfettiEffect from "@/components/confetti-effect";
 import "./styles.css";
 
 export default function Home() {
