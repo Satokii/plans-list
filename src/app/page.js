@@ -41,27 +41,6 @@ export default function Home() {
     if (!error) setTasks(data);
   };
 
-  const addTask = async () => {
-    if (!user || input.trim() === "") return;
-    const { data, error } = await supabase
-      .from("todos")
-      .insert([
-        {
-          text: input,
-          description: description,
-          completed: false,
-          user_id: user.id,
-        },
-      ])
-      .select();
-
-    if (!error) {
-      setTasks([data[0], ...tasks]);
-      setInput("");
-      setDescription("");
-    }
-  };
-
   const handleToggleExpand = (taskId) => {
     setExpandedTaskId((prevId) => (prevId === taskId ? null : taskId));
   };
@@ -145,11 +124,13 @@ export default function Home() {
       </button>
 
       <TaskInput
+        tasks={tasks}
+        setTasks={setTasks}
+        user={user}
         input={input}
         setInput={setInput}
         description={description}
         setDescription={setDescription}
-        addTask={addTask}
       />
 
       {/* Active Tasks Section */}

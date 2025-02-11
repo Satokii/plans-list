@@ -1,10 +1,35 @@
+import { supabase } from "@/lib/supabase";
+
 export default function TaskInput({
+  tasks,
+  setTasks,
+  user,
   input,
   setInput,
   description,
   setDescription,
-  addTask,
 }) {
+  const addTask = async () => {
+    if (!user || input.trim() === "") return;
+    const { data, error } = await supabase
+      .from("todos")
+      .insert([
+        {
+          text: input,
+          description: description,
+          completed: false,
+          user_id: user.id,
+        },
+      ])
+      .select();
+
+    if (!error) {
+      setTasks([data[0], ...tasks]);
+      setInput("");
+      setDescription("");
+    }
+  };
+
   return (
     <div className="input-container">
       <input
