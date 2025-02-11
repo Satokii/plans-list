@@ -235,7 +235,7 @@
 }
 
 .completed-task-details {
-  background: #f0e4cc;
+  background: #c5fdc5;
 }
 
 .task-details div,
@@ -319,11 +319,11 @@
 }
 
 .remove-btn {
-  background: #ff3b3b;
+  background: #f00d0d;
 }
 
 .remove-btn:hover {
-  background: #d32f2f;
+  background: #d72828;
   animation: wiggle 0.2s ease-in-out;
 }
 
