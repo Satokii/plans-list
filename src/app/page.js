@@ -146,7 +146,7 @@ export default function Home() {
       </button>
 
       {/* Input for new tasks */}
-      <div className="input-container">
+      {/* <div className="input-container">
         <input
           type="text"
           value={input}
@@ -163,7 +163,7 @@ export default function Home() {
         <button onClick={addTask} className="add-button">
           Add
         </button>
-      </div>
+      </div> */}
 
       {/* Active Tasks Section */}
       <h2 className="tasks-header">To Do:</h2>
