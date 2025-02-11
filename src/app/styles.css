@@ -205,7 +205,6 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  background: white;
   color: black;
   padding: 12px;
   border-radius: 10px;
@@ -219,13 +218,17 @@
   animation: slideInFromTop 0.7s ease-out;
 }
 
+.task {
+  background: #ff97a6;
+}
+
 .completed-task {
   background: #3dbe3d;
   opacity: 0.9;
 }
 
 .task:hover {
-  background: #eaeaea;
+  background: #ff8698;
 }
 
 .completed-task:hover {
@@ -254,13 +257,16 @@
 
 .task-details,
 .completed-task-details {
-  background: #fff9e5;
   width: 100%;
   padding: 16px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 12px;
   transition: 0.3s ease-in-out;
+}
+
+.task-details {
+  background: #f7c4cb;
 }
 
 .completed-task-details {
