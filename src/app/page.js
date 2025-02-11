@@ -49,38 +49,6 @@ export default function Home() {
     setExpandedTaskId((prevId) => (prevId === taskId ? null : taskId));
   };
 
-  const markTaskAsComplete = async (taskId) => {
-    if (!user || !user.id) {
-      console.error("User is not logged in or user ID is missing.");
-      return;
-    }
-
-    const { data, error } = await supabase
-      .from("todos")
-      .update({ completed: true })
-      .eq("id", taskId)
-      .eq("user_id", user.id)
-      .select();
-
-    if (error) {
-      console.error("Error updating task:", error);
-      return;
-    }
-
-    setShowConfetti(true);
-    setFadeOut(false);
-    setTimeout(() => {
-      setFadeOut(true);
-    }, 2500);
-    setTimeout(() => setShowConfetti(false), 4000);
-
-    setTasks(
-      tasks.map((task) =>
-        task.id === taskId ? { ...task, completed: true } : task
-      )
-    );
-  };
-
   const removeTask = async (id) => {
     const { error } = await supabase.from("todos").delete().match({ id });
     if (!error) {
@@ -108,9 +76,12 @@ export default function Home() {
 
       <ActiveTasks
         tasks={tasks}
+        setTasks={setTasks}
+        user={user}
+        setShowConfetti={setShowConfetti}
+        setFadeOut={setFadeOut}
         expandedTaskId={expandedTaskId}
         handleToggleExpand={handleToggleExpand}
-        markTaskAsComplete={markTaskAsComplete}
         removeTask={removeTask}
       />
 
