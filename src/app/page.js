@@ -49,6 +49,22 @@ export default function Home() {
     setExpandedTaskId((prevId) => (prevId === taskId ? null : taskId));
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".task, .completed-task")) {
+        setExpandedTaskId(null);
+      }
+    };
+
+    if (expandedTaskId !== null) {
+      document.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [expandedTaskId]);
+
   const removeTask = async (id) => {
     const { error } = await supabase.from("todos").delete().match({ id });
     if (!error) {
