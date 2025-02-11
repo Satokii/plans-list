@@ -9,7 +9,11 @@ export default function LogoutButton() {
     router.push("/login");
   };
 
-  <button className="log-out-btn" onClick={handleSignOut}>
-    Log Out
-  </button>;
+  return (
+    <>
+      <button className="log-out-btn" onClick={handleSignOut}>
+        Log Out
+      </button>
+    </>
+  );
 }
