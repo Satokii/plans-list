@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import ConfettiEffect from "@/components/confetti-effect";
+import TaskInput from "@/components/task-input";
 import "./styles.css";
 
 export default function Home() {
@@ -136,34 +137,20 @@ export default function Home() {
 
   return (
     <div className="container">
-      {showConfetti && (
-        <ConfettiEffect fadeOut={fadeOut} />
-      )}
+      {showConfetti && <ConfettiEffect fadeOut={fadeOut} />}
 
       <h1 className="title">To-Do List</h1>
       <button className="log-out-btn" onClick={handleSignOut}>
         Log Out
       </button>
 
-      {/* Input for new tasks */}
-      {/* <div className="input-container">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Add a new activity..."
-          className="input"
-        />
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description (optional)..."
-          className="description-input"
-        />
-        <button onClick={addTask} className="add-button">
-          Add
-        </button>
-      </div> */}
+      <TaskInput
+        input={input}
+        setInput={setInput}
+        description={description}
+        setDescription={setDescription}
+        addTask={addTask}
+      />
 
       {/* Active Tasks Section */}
       <h2 className="tasks-header">To Do:</h2>
