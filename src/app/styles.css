@@ -191,15 +191,17 @@
 }
 
 .completed-task {
-  background: #f5f5f5;
-  color: #555;
-  opacity: 0.8;
+  background: #3dbe3d;
+  opacity: 0.9;
 }
 
-.task:hover,
+.task:hover {
+  background: #eaeaea;
+}
+
 .completed-task:hover {
   opacity: 1;
-  background: #eaeaea;
+  background: #32ae32;
 }
 
 .task-preview,
