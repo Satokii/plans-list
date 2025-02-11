@@ -1,3 +1,6 @@
+import Image from "next/image";
+import ExpandIcon from "../../../public/assets/svgs/expand.svg";
+
 export default function ActiveTasks({
   tasks,
   expandedTaskId,
@@ -20,6 +23,11 @@ export default function ActiveTasks({
                 className="task-preview"
                 onClick={() => handleToggleExpand(task.id)}
               >
+                <Image
+                  className="expand-task-icon"
+                  src={ExpandIcon}
+                  alt="expand-icon"
+                ></Image>
                 <span className="task-text">{task.text}</span>
 
                 <button
