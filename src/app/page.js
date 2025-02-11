@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import ConfettiEffect from "@/components/confetti-effect";
 import TaskInput from "@/components/task-input";
+import ActiveTasks from "@/components/active-tasks";
 import "./styles.css";
 
 export default function Home() {
@@ -134,7 +135,14 @@ export default function Home() {
       />
 
       {/* Active Tasks Section */}
-      <h2 className="tasks-header">To Do:</h2>
+      <ActiveTasks
+        tasks={tasks}
+        expandedTaskId={expandedTaskId}
+        handleToggleExpand={handleToggleExpand}
+        markTaskAsComplete={markTaskAsComplete}
+        removeTask={removeTask}
+      />
+      {/* <h2 className="tasks-header">To Do:</h2>
       <ul className="list">
         {tasks
           .filter((task) => !task.completed)
@@ -186,7 +194,7 @@ export default function Home() {
               )}
             </li>
           ))}
-      </ul>
+      </ul> */}
 
       {/* Completed Tasks Section */}
       <h2 className="completed-tasks-header">Completed:</h2>
