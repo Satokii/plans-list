@@ -90,25 +90,31 @@ export default function Home() {
         setDescription={setDescription}
       />
 
-      <ActiveTasks
-        tasks={tasks}
-        setTasks={setTasks}
-        user={user}
-        setShowConfetti={setShowConfetti}
-        setFadeOut={setFadeOut}
-        expandedTaskId={expandedTaskId}
-        handleToggleExpand={handleToggleExpand}
-        removeTask={removeTask}
-      />
+      {tasks.length === 0 ? (
+        <p className="no-tasks-message">Add an activity to get started</p>
+      ) : (
+        <>
+          <ActiveTasks
+            tasks={tasks}
+            setTasks={setTasks}
+            user={user}
+            setShowConfetti={setShowConfetti}
+            setFadeOut={setFadeOut}
+            expandedTaskId={expandedTaskId}
+            handleToggleExpand={handleToggleExpand}
+            removeTask={removeTask}
+          />
 
-      <CompletedTasks
-        tasks={tasks}
-        setTasks={setTasks}
-        user={user}
-        expandedTaskId={expandedTaskId}
-        handleToggleExpand={handleToggleExpand}
-        removeTask={removeTask}
-      />
+          <CompletedTasks
+            tasks={tasks}
+            setTasks={setTasks}
+            user={user}
+            expandedTaskId={expandedTaskId}
+            handleToggleExpand={handleToggleExpand}
+            removeTask={removeTask}
+          />
+        </>
+      )}
     </div>
   );
 }
