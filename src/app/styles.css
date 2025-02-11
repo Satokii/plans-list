@@ -435,7 +435,7 @@
   }
 
   .task button,
-  .restore-btn {
+  .completed-task button {
     padding: 6px 10px;
     font-size: 12px;
     width: 100%;
