@@ -134,7 +134,6 @@ export default function Home() {
         setDescription={setDescription}
       />
 
-      {/* Active Tasks Section */}
       <ActiveTasks
         tasks={tasks}
         expandedTaskId={expandedTaskId}
@@ -142,59 +141,6 @@ export default function Home() {
         markTaskAsComplete={markTaskAsComplete}
         removeTask={removeTask}
       />
-      {/* <h2 className="tasks-header">To Do:</h2>
-      <ul className="list">
-        {tasks
-          .filter((task) => !task.completed)
-          .map((task) => (
-            <li
-              key={task.id}
-              className={`task ${expandedTaskId === task.id ? "expanded" : ""}`}
-            >
-              <div
-                className="task-preview"
-                onClick={() => handleToggleExpand(task.id)}
-              >
-                <span className="task-text">{task.text}</span>
-
-                <button
-                  className="complete-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    markTaskAsComplete(task.id);
-                  }}
-                >
-                  Complete
-                </button>
-
-                <button
-                  className="remove-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    removeTask(task.id);
-                  }}
-                >
-                  ✖
-                </button>
-              </div>
-
-              {expandedTaskId === task.id && (
-                <div className="task-details">
-                  <div>
-                    <h4>Title</h4>
-                    <p className="full-title">{task.text}</p>
-                  </div>
-                  <div>
-                    <h4>Description</h4>
-                    <p className="task-description">
-                      {task.description || "No description provided"}
-                    </p>
-                  </div>
-                </div>
-              )}
-            </li>
-          ))}
-      </ul> */}
 
       {/* Completed Tasks Section */}
       <h2 className="completed-tasks-header">Completed:</h2>
