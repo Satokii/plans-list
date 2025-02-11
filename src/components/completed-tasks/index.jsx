@@ -102,7 +102,7 @@ export default function CompletedTasks({
         </>
       ) : (
         tasks.some((task) => !task.completed) && (
-          <p className="no-completed-tasks-message">No completed tasks</p>
+          <p className="no-completed-tasks-message">No completed activities!</p>
         )
       )}
     </>

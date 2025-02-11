@@ -138,6 +138,39 @@
   background: #e65c00;
 }
 
+/* No tasks messages */
+.no-tasks-message,
+.no-active-tasks-message,
+.no-completed-tasks-message {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Indie Flower", cursive;
+  color: #ff6f00;
+  background: rgba(255, 245, 230, 0.9);
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.no-tasks-message {
+  font-size: 20px;
+  color: #ff4500;
+  background: rgba(255, 230, 200, 0.9);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.no-active-tasks-message {
+  color: #ff8500;
+  background: rgba(255, 240, 210, 0.9);
+}
+
+.no-completed-tasks-message {
+  color: #008b8b;
+  background: rgba(200, 255, 230, 0.9);
+}
+
 /* Task List */
 .tasks-header,
 .completed-tasks-header {
