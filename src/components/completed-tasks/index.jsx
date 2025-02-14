@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import ExpandIcon from "../../../public/assets/svgs/expand.svg";
@@ -10,6 +11,9 @@ export default function CompletedTasks({
   handleToggleExpand,
   removeTask,
 }) {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState(null);
+
   const restoreTask = async (taskId) => {
     if (!user || !user.id) {
       console.error("User is not logged in or user ID is missing.");
@@ -34,6 +38,21 @@ export default function CompletedTasks({
       )
     );
   };
+
+  const handleDeleteClick = (e, taskId) => {
+    e.stopPropagation();
+    setTaskToDelete(taskId);
+    setShowConfirmModal(true);
+  };
+
+  const confirmDelete = () => {
+    if (taskToDelete) {
+      removeTask(taskToDelete);
+      setShowConfirmModal(false);
+      setTaskToDelete(null);
+    }
+  };
+
   return (
     <>
       {tasks.some((task) => task.completed) ? (
@@ -72,10 +91,7 @@ export default function CompletedTasks({
 
                     <button
                       className="remove-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeTask(task.id);
-                      }}
+                      onClick={(e) => handleDeleteClick(e, task.id)}
                     >
                       🗑️ Delete
                     </button>
@@ -104,6 +120,24 @@ export default function CompletedTasks({
         tasks.some((task) => !task.completed) && (
           <p className="no-completed-tasks-message">No completed activities!</p>
         )
+      )}
+
+      {/* Custom Confirmation Modal */}
+      {showConfirmModal && (
+        <div className="confirm-modal">
+          <div className="confirm-modal-content">
+            <p>Are you sure you want to delete this task?</p>
+            <button className="confirm-btn" onClick={confirmDelete}>
+              Yes, Delete
+            </button>
+            <button
+              className="cancel-btn"
+              onClick={() => setShowConfirmModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
       )}
     </>
   );
