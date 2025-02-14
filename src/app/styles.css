@@ -643,4 +643,20 @@
     padding: 8px 12px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
   }
+
+  .confirm-modal-content {
+    width: 80%;
+    padding: 15px;
+  }
+
+  .confirm-modal-content p {
+    font-size: 16px;
+  }
+
+  .confirm-btn,
+  .cancel-btn {
+    width: 100%;
+    margin: 5px 0;
+    font-size: 14px;
+  }
 }
