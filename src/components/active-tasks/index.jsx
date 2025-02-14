@@ -14,6 +14,7 @@ export default function ActiveTasks({
   confirmDelete,
   showConfirmModal,
   setShowConfirmModal,
+  isDeleteLoading
 }) {
   const markTaskAsComplete = async (taskId) => {
     if (!user || !user.id) {
@@ -115,20 +116,26 @@ export default function ActiveTasks({
         )
       )}
 
-      {/* Custom Confirmation Modal */}
+      {/* Delete Confirmation Modal */}
       {showConfirmModal && (
         <div className="confirm-modal">
           <div className="confirm-modal-content">
             <p>Are you sure you want to delete this Activity?</p>
-            <button className="confirm-btn" onClick={confirmDelete}>
-              Confirm
-            </button>
-            <button
-              className="cancel-btn"
-              onClick={() => setShowConfirmModal(false)}
-            >
-              Cancel
-            </button>
+            {isDeleteLoading ? (
+              <span className="carrot-spinner">🥕</span>
+            ) : (
+              <>
+                <button className="confirm-btn" onClick={confirmDelete}>
+                  Confirm
+                </button>
+                <button
+                  className="cancel-btn"
+                  onClick={() => setShowConfirmModal(false)}
+                >
+                  Cancel
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

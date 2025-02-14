@@ -21,6 +21,7 @@ export default function Home() {
   const [fadeOut, setFadeOut] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   const router = useRouter();
 
@@ -82,9 +83,14 @@ export default function Home() {
 
   const confirmDelete = () => {
     if (taskToDelete) {
-      removeTask(taskToDelete);
-      setShowConfirmModal(false);
-      setTaskToDelete(null);
+      setIsDeleteLoading(true);
+
+      setTimeout(() => {
+        removeTask(taskToDelete);
+        setShowConfirmModal(false);
+        setTaskToDelete(null);
+        setIsDeleteLoading(false);
+      }, 600);
     }
   };
 
@@ -123,6 +129,7 @@ export default function Home() {
             confirmDelete={confirmDelete}
             showConfirmModal={showConfirmModal}
             setShowConfirmModal={setShowConfirmModal}
+            isDeleteLoading={isDeleteLoading}
           />
 
           <CompletedTasks
@@ -135,6 +142,7 @@ export default function Home() {
             confirmDelete={confirmDelete}
             showConfirmModal={showConfirmModal}
             setShowConfirmModal={setShowConfirmModal}
+            isDeleteLoading={isDeleteLoading}
           />
         </>
       )}

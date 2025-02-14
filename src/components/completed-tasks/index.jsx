@@ -13,6 +13,7 @@ export default function CompletedTasks({
   confirmDelete,
   showConfirmModal,
   setShowConfirmModal,
+  isDeleteLoading,
 }) {
   const [showRestoreModal, setShowRestoreModal] = useState(false);
   const [taskToRestore, setTaskToRestore] = useState(null);
@@ -128,15 +129,21 @@ export default function CompletedTasks({
         <div className="confirm-modal">
           <div className="confirm-modal-content">
             <p>Are you sure you want to delete this Activity?</p>
-            <button className="confirm-btn" onClick={confirmDelete}>
-              Confirm
-            </button>
-            <button
-              className="cancel-btn"
-              onClick={() => setShowConfirmModal(false)}
-            >
-              Cancel
-            </button>
+            {isDeleteLoading ? (
+              <span className="carrot-spinner">🥕</span>
+            ) : (
+              <>
+                <button className="confirm-btn" onClick={confirmDelete}>
+                  Confirm
+                </button>
+                <button
+                  className="cancel-btn"
+                  onClick={() => setShowConfirmModal(false)}
+                >
+                  Cancel
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}
