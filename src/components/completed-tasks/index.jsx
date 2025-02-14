@@ -126,9 +126,9 @@ export default function CompletedTasks({
       {showConfirmModal && (
         <div className="confirm-modal">
           <div className="confirm-modal-content">
-            <p>Are you sure you want to delete this task?</p>
+            <p>Are you sure you want to delete this Activity?</p>
             <button className="confirm-btn" onClick={confirmDelete}>
-              Yes, Delete
+              Confirm
             </button>
             <button
               className="cancel-btn"
