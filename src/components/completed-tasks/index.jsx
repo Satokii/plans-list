@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import ExpandIcon from "../../../public/assets/svgs/expand.svg";
@@ -9,11 +8,11 @@ export default function CompletedTasks({
   user,
   expandedTaskId,
   handleToggleExpand,
-  removeTask,
+  handleDeleteClick,
+  confirmDelete,
+  showConfirmModal,
+  setShowConfirmModal,
 }) {
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [taskToDelete, setTaskToDelete] = useState(null);
-
   const restoreTask = async (taskId) => {
     if (!user || !user.id) {
       console.error("User is not logged in or user ID is missing.");
@@ -37,20 +36,6 @@ export default function CompletedTasks({
         task.id === taskId ? { ...task, completed: false } : task
       )
     );
-  };
-
-  const handleDeleteClick = (e, taskId) => {
-    e.stopPropagation();
-    setTaskToDelete(taskId);
-    setShowConfirmModal(true);
-  };
-
-  const confirmDelete = () => {
-    if (taskToDelete) {
-      removeTask(taskToDelete);
-      setShowConfirmModal(false);
-      setTaskToDelete(null);
-    }
   };
 
   return (

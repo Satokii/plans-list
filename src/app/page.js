@@ -19,6 +19,8 @@ export default function Home() {
   const [expandedTaskId, setExpandedTaskId] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState(null);
 
   const router = useRouter();
 
@@ -72,6 +74,20 @@ export default function Home() {
     }
   };
 
+  const handleDeleteClick = (e, taskId) => {
+    e.stopPropagation();
+    setTaskToDelete(taskId);
+    setShowConfirmModal(true);
+  };
+
+  const confirmDelete = () => {
+    if (taskToDelete) {
+      removeTask(taskToDelete);
+      setShowConfirmModal(false);
+      setTaskToDelete(null);
+    }
+  };
+
   return (
     <div className="container">
       {showConfetti && <ConfettiEffect fadeOut={fadeOut} />}
@@ -111,7 +127,10 @@ export default function Home() {
             user={user}
             expandedTaskId={expandedTaskId}
             handleToggleExpand={handleToggleExpand}
-            removeTask={removeTask}
+            handleDeleteClick={handleDeleteClick}
+            confirmDelete={confirmDelete}
+            showConfirmModal={showConfirmModal}
+            setShowConfirmModal={setShowConfirmModal}
           />
         </>
       )}
