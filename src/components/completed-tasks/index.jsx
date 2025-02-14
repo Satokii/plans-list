@@ -16,12 +16,15 @@ export default function CompletedTasks({
 }) {
   const [showRestoreModal, setShowRestoreModal] = useState(false);
   const [taskToRestore, setTaskToRestore] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const restoreTask = async (taskId) => {
     if (!user || !user.id) {
       console.error("User is not logged in or user ID is missing.");
       return;
     }
+
+    setIsLoading(true);
 
     const { error } = await supabase
       .from("todos")
@@ -40,8 +43,12 @@ export default function CompletedTasks({
         task.id === taskId ? { ...task, completed: false } : task
       )
     );
-    setShowRestoreModal(false);
-    setTaskToRestore(null);
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowRestoreModal(false);
+      setTaskToRestore(null);
+    }, 600);
   };
 
   const handleRestoreClick = (e, taskId) => {
@@ -139,18 +146,24 @@ export default function CompletedTasks({
         <div className="confirm-modal">
           <div className="confirm-modal-content">
             <p>Would you like to reactivate this Activity?</p>
-            <button
-              className="confirm-btn"
-              onClick={() => restoreTask(taskToRestore)}
-            >
-              Reactivate
-            </button>
-            <button
-              className="cancel-btn"
-              onClick={() => setShowRestoreModal(false)}
-            >
-              Cancel
-            </button>
+            {isLoading ? (
+              <span className="carrot-spinner">🥕</span>
+            ) : (
+              <>
+                <button
+                  className="confirm-btn"
+                  onClick={() => restoreTask(taskToRestore)}
+                >
+                  Reactivate
+                </button>
+                <button
+                  className="cancel-btn"
+                  onClick={() => setShowRestoreModal(false)}
+                >
+                  Cancel
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

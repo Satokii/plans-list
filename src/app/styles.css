@@ -539,6 +539,23 @@
   background: darkgray;
 }
 
+/* Carrot Loading Spinner */
+.carrot-spinner {
+  display: inline-block;
+  font-size: 20px;
+  animation: spin 1s linear infinite;
+  margin-right: 5px; /* To space it out nicely */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* MEDIA QUERIES */
 @media (max-width: 600px) {
   .container {
