@@ -10,7 +10,10 @@ export default function ActiveTasks({
   setFadeOut,
   expandedTaskId,
   handleToggleExpand,
-  removeTask,
+  handleDeleteClick,
+  confirmDelete,
+  showConfirmModal,
+  setShowConfirmModal,
 }) {
   const markTaskAsComplete = async (taskId) => {
     if (!user || !user.id) {
@@ -82,10 +85,7 @@ export default function ActiveTasks({
 
                     <button
                       className="remove-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeTask(task.id);
-                      }}
+                      onClick={(e) => handleDeleteClick(e, task.id)}
                     >
                       🗑️ Delete
                     </button>
@@ -113,6 +113,24 @@ export default function ActiveTasks({
         tasks.some((task) => task.completed) && (
           <p className="no-active-tasks-message">No current activities!</p>
         )
+      )}
+
+      {/* Custom Confirmation Modal */}
+      {showConfirmModal && (
+        <div className="confirm-modal">
+          <div className="confirm-modal-content">
+            <p>Are you sure you want to delete this Activity?</p>
+            <button className="confirm-btn" onClick={confirmDelete}>
+              Confirm
+            </button>
+            <button
+              className="cancel-btn"
+              onClick={() => setShowConfirmModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
       )}
     </>
   );

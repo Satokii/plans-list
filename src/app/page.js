@@ -119,6 +119,10 @@ export default function Home() {
             expandedTaskId={expandedTaskId}
             handleToggleExpand={handleToggleExpand}
             removeTask={removeTask}
+            handleDeleteClick={handleDeleteClick}
+            confirmDelete={confirmDelete}
+            showConfirmModal={showConfirmModal}
+            setShowConfirmModal={setShowConfirmModal}
           />
 
           <CompletedTasks
