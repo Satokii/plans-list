@@ -16,10 +16,38 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #ff7f32, #ff914d);
+  padding: 60px 20px;
   font-family: "Indie Flower", cursive;
-  padding: 50px 20px;
   animation: fadeIn 0.8s ease-in-out;
+  background: linear-gradient(135deg, #ff6a00, #ff914d, #ffb870);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite alternate;
+  position: relative;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0) 50%
+  );
+  z-index: 0;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Title */
