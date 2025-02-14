@@ -67,7 +67,7 @@ export default function CompletedTasks({
                         restoreTask(task.id);
                       }}
                     >
-                      🔄 Add Back
+                      ♻️ Add Back
                     </button>
 
                     <button

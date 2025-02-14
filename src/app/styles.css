@@ -325,74 +325,80 @@
 }
 
 /* Complete & Remove Buttons */
+/* General Button Styling */
 .task button,
 .completed-task button {
   flex-shrink: 0;
   color: white;
-  min-width: 100px;
-  padding: 8px 12px;
-  font-size: 14px;
+  min-width: 110px;
+  padding: 10px 14px;
+  font-size: 15px;
   text-align: center;
-  margin-left: 10px;
+  margin-left: 12px;
   font-family: "Indie Flower", cursive;
   border: none;
-  border-radius: 8px;
+  border-radius: 18px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Complete Button - Vibrant Golden Amber */
 .complete-btn {
-  background-color: green;
+  background: linear-gradient(145deg, #f4a261, #e08642);
   margin-left: auto;
 }
+
 .complete-btn:hover {
-  background-color: rgb(3, 93, 3);
+  background: linear-gradient(145deg, #f29a56, #d97930);
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(242, 154, 86, 0.4);
 }
 
-@keyframes wiggle {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(5deg);
-  }
-  50% {
-    transform: rotate(-5deg);
-  }
-  75% {
-    transform: rotate(3deg);
-  }
-}
-
+/* Remove Button - Fiery Red-Orange */
 .remove-btn {
-  background: #f00d0d;
+  background: linear-gradient(145deg, #e63946, #c1272d);
 }
 
 .remove-btn:hover {
-  background: #d72828;
+  background: linear-gradient(145deg, #d82e3c, #aa2027);
   animation: wiggle 0.2s ease-in-out;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(216, 46, 60, 0.4);
 }
 
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1.05); }
+  25% { transform: rotate(3deg) scale(1.05); }
+  50% { transform: rotate(-3deg) scale(1.05); }
+  75% { transform: rotate(2deg) scale(1.05); }
+}
+
+/* Restore Button - Deep Sunset Pink */
 .restore-btn {
-  background: #3d3dbe;
+  background: linear-gradient(145deg, #e76f51, #c55a42);
 }
 
 .restore-btn:hover {
-  background: #2a2aa7;
+  background: linear-gradient(145deg, #d9654b, #af4f3b);
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(217, 101, 75, 0.4);
 }
 
+/* Expand Task Icon */
 .expand-task-icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
   transition: transform 0.3s ease-in-out;
 }
 
+/* Expand Task Rotation */
 .task.expanded .expand-task-icon,
 .completed-task.completed-task-expanded .expand-task-icon {
   transform: rotate(180deg);
 }
+
 
 /* MEDIA QUERIES */
 @media (max-width: 600px) {
