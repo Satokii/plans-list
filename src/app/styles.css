@@ -184,20 +184,34 @@
 
 /* Add Task Button */
 .add-button {
-  background: #ff6f00;
+  background: linear-gradient(135deg, #ff914d, #ff6f00);
   width: 100%;
   font-family: "Indie Flower", cursive;
   color: white;
   font-size: 16px;
+  font-weight: bold;
   padding: 8px 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-button:hover {
-  background: #e65c00;
+  background: linear-gradient(135deg, #ff6f00, #ff914d);
+  transform: scale(1.02);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+  color: #fff9e6;
+}
+
+.add-button:active {
+  background: #ff4500;
+  transform: scale(0.98);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* No tasks messages */
