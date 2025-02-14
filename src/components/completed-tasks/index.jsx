@@ -67,7 +67,7 @@ export default function CompletedTasks({
                         restoreTask(task.id);
                       }}
                     >
-                      ♻️ Add To Tasks
+                      ♻️ Reactivate Activity
                     </button>
 
                     <button
