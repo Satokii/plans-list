@@ -138,7 +138,7 @@ export default function CompletedTasks({
       {showRestoreModal && (
         <div className="confirm-modal">
           <div className="confirm-modal-content">
-            <p>Would you like to reactivate this activity?</p>
+            <p>Would you like to reactivate this Activity?</p>
             <button
               className="confirm-btn"
               onClick={() => restoreTask(taskToRestore)}
