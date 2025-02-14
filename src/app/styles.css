@@ -469,7 +469,7 @@
   box-shadow: 0px 4px 10px rgba(217, 101, 75, 0.4);
 }
 
-.expand-task-icon {
+.expand-task-icon, .carrot-icon {
   width: 20px;
   height: 20px;
   margin-right: 12px;
@@ -477,7 +477,7 @@
 }
 
 .task.expanded .expand-task-icon,
-.completed-task.completed-task-expanded .expand-task-icon {
+.completed-task.completed-task-expanded .carrot-icon {
   transform: rotate(180deg);
 }
 
@@ -544,7 +544,7 @@
   display: inline-block;
   font-size: 20px;
   animation: spin 1s linear infinite;
-  margin-right: 5px; /* To space it out nicely */
+  margin-right: 5px;
 }
 
 @keyframes spin {

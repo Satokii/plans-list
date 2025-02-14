@@ -77,11 +77,8 @@ export default function CompletedTasks({
                     className="completed-task-preview"
                     onClick={() => handleToggleExpand(task.id)}
                   >
-                    <Image
-                      className="expand-task-icon"
-                      src={ExpandIcon}
-                      alt="expand-icon"
-                    />
+                    <div className="carrot-icon">🥕</div>
+
                     <span className="completed-task-text">{task.text}</span>
 
                     <button
