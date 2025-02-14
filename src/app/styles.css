@@ -164,25 +164,45 @@
   font-size: 18px;
   font-weight: bold;
   font-family: "Indie Flower", cursive;
-  color: #ff6f00;
-  background: rgba(255, 245, 230, 0.9);
-  padding: 12px;
-  border-radius: 12px;
+  color: #d65a00;
+  background: rgba(255, 236, 205, 0.95);
+  padding: 14px 18px;
+  border-radius: 14px;
   margin-top: 30px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.5s ease-in-out,
+    subtleBounce 1.4s infinite alternate ease-in-out;
+  max-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .no-tasks-message {
   font-size: 20px;
   color: #ff4500;
-  background: rgba(255, 230, 200, 0.9);
-  animation: fadeIn 0.6s ease-in-out;
+  background: rgba(255, 214, 181, 0.95);
+  border-left: 4px solid #ff6f00;
 }
 
-.no-active-tasks-message,
+.no-active-tasks-message {
+  color: #c45e00;
+  background: rgba(255, 220, 190, 0.95);
+  border-left: 4px solid #ff6f00;
+}
+
 .no-completed-tasks-message {
-  color: #008b8b;
-  background: rgba(200, 255, 230, 0.9);
+  color: #a84e00;
+  background: rgba(255, 200, 160, 0.95);
+  border-left: 4px solid #ff6f00;
+}
+
+@keyframes subtleBounce {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
 }
 
 /* Task List */
@@ -325,7 +345,6 @@
 }
 
 /* Complete & Remove Buttons */
-/* General Button Styling */
 .task button,
 .completed-task button {
   flex-shrink: 0;
@@ -343,7 +362,6 @@
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Complete Button - Vibrant Golden Amber */
 .complete-btn {
   background: linear-gradient(145deg, #f4a261, #e08642);
   margin-left: auto;
@@ -355,7 +373,6 @@
   box-shadow: 0px 4px 10px rgba(242, 154, 86, 0.4);
 }
 
-/* Remove Button - Fiery Red-Orange */
 .remove-btn {
   background: linear-gradient(145deg, #e63946, #c1272d);
 }
@@ -368,13 +385,21 @@
 }
 
 @keyframes wiggle {
-  0%, 100% { transform: rotate(0deg) scale(1.05); }
-  25% { transform: rotate(3deg) scale(1.05); }
-  50% { transform: rotate(-3deg) scale(1.05); }
-  75% { transform: rotate(2deg) scale(1.05); }
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1.05);
+  }
+  25% {
+    transform: rotate(3deg) scale(1.05);
+  }
+  50% {
+    transform: rotate(-3deg) scale(1.05);
+  }
+  75% {
+    transform: rotate(2deg) scale(1.05);
+  }
 }
 
-/* Restore Button - Deep Sunset Pink */
 .restore-btn {
   background: linear-gradient(145deg, #e76f51, #c55a42);
 }
@@ -385,7 +410,6 @@
   box-shadow: 0px 4px 10px rgba(217, 101, 75, 0.4);
 }
 
-/* Expand Task Icon */
 .expand-task-icon {
   width: 20px;
   height: 20px;
@@ -393,12 +417,10 @@
   transition: transform 0.3s ease-in-out;
 }
 
-/* Expand Task Rotation */
 .task.expanded .expand-task-icon,
 .completed-task.completed-task-expanded .expand-task-icon {
   transform: rotate(180deg);
 }
-
 
 /* MEDIA QUERIES */
 @media (max-width: 600px) {
