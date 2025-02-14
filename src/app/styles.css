@@ -218,40 +218,49 @@
   }
 }
 
+/* Tasks */
 .task,
 .completed-task {
   display: flex;
   flex-direction: column;
   align-items: start;
-  color: black;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  color: #333;
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
   font-size: 18px;
   transition: 0.3s ease-in-out;
   cursor: pointer;
   overflow: hidden;
-  min-height: 50px;
+  min-height: 55px;
   animation: slideInFromTop 0.7s ease-out;
 }
 
 .task {
-  background: #ff97a6;
-}
-
-.completed-task {
-  background: #3dbe3d;
-  opacity: 0.9;
+  background: linear-gradient(145deg, #ffe57f, #ffbf00);
+  border-left: 6px solid #ff9f00;
 }
 
 .task:hover {
-  background: #ff8698;
+  background: linear-gradient(145deg, #ffdb70, #ffc107);
+  transform: scale(1.02);
+  box-shadow: 0px 5px 12px rgba(255, 165, 0, 0.3);
+}
+
+.completed-task {
+  background: linear-gradient(145deg, #ff9f80, #ff7b21);
+  border-left: 6px solid #e65c00;
 }
 
 .completed-task:hover {
-  opacity: 1;
-  background: #32ae32;
+  background: linear-gradient(145deg, #ff8b6f, #ff5900);
+  transform: scale(1.02);
+  box-shadow: 0px 5px 12px rgba(255, 94, 0, 0.3);
+}
+
+.completed-task-text {
+  opacity: 0.7;
 }
 
 .task-preview,
@@ -271,45 +280,35 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 60%;
+  font-weight: 600;
 }
 
 .task-details,
 .completed-task-details {
   width: 100%;
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 12px;
   transition: 0.3s ease-in-out;
 }
 
 .task-details {
-  background: #f7c4cb;
+  background: rgba(255, 211, 102, 0.4);
+  border-left: 4px solid #ffb300;
 }
 
 .completed-task-details {
-  background: #c5fdc5;
-}
-
-.task-details div,
-.completed-task-details div {
-  margin-bottom: 12px;
+  background: rgba(255, 158, 128, 0.4);
+  border-left: 4px solid #ff5722;
 }
 
 .task-details h4,
 .completed-task-details h4 {
   font-size: 18px;
   font-weight: bold;
-  color: #ff6f00;
+  color: #d35400;
   margin-bottom: 6px;
-}
-
-.full-title,
-.completed-full-title {
-  font-size: 16px;
-  line-height: 1.4;
-  color: #333;
-  word-wrap: break-word;
 }
 
 .task-description,
@@ -320,15 +319,9 @@
   font-style: italic;
 }
 
-.task-details p,
-.completed-task-details p {
-  padding: 8px 0;
-  margin: 0;
-}
-
-.task-details div:last-child,
-.completed-task-details div:last-child {
-  margin-bottom: 0;
+.task-details:hover,
+.completed-task-details:hover {
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 /* Complete & Remove Buttons */
