@@ -227,6 +227,7 @@
   padding: 14px 18px;
   border-radius: 14px;
   margin-top: 30px;
+  margin-bottom: 30px;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
   animation: fadeIn 0.5s ease-in-out,
     subtleBounce 1.4s infinite alternate ease-in-out;
@@ -483,56 +484,56 @@
 /* MEDIA QUERIES */
 @media (max-width: 600px) {
   .container {
-    padding: 70px 20px;
+    padding: 40px 15px;
   }
 
   .title {
-    font-size: 32px;
+    font-size: 28px;
+    margin-top: 30px;
   }
 
-  .title::before {
-    font-size: 36px;
-  }
-
+  .title::before,
   .title::after {
     font-size: 36px;
   }
 
   .input-container {
-    flex-direction: column;
     align-items: stretch;
-    max-width: 85%;
+    max-width: 90%;
+    margin-bottom: 10px;
+    padding: 15px;
   }
 
-  .input {
+  .input-container .input,
+  .description-input {
     margin-bottom: 10px;
     margin-right: 0;
-    font-size: 15px;
+    padding: 8px 14px;
+    font-size: 14px;
   }
 
   .add-button {
     font-size: 14px;
-    padding: 5px 16px;
+    padding: 8px 14px;
   }
 
   .tasks-header,
   .completed-tasks-header {
-    font-size: 20px;
-    font-weight: 200;
-    color: black;
-    margin-top: 15px;
-    letter-spacing: 1px;
-    border-bottom: 2px solid #ff6f00;
+    font-size: 18px;
+    font-weight: 300;
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #ff6f00;
   }
 
   .list,
   .completed-tasks-list {
-    max-width: 90%;
+    max-width: 95%;
   }
 
   .task-preview,
   .completed-task-preview {
-    font-size: 16px;
+    font-size: 14px;
     flex-wrap: wrap;
   }
 
@@ -544,31 +545,32 @@
 
   .task button,
   .completed-task button {
-    padding: 6px 10px;
+    padding: 6px 12px;
     width: 100%;
-    margin-top: 5px;
+    margin-top: 8px;
     margin-left: 0;
+    font-size: 14px;
   }
 
   .task-details,
   .completed-task-details {
     padding: 12px;
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   .task-details h4,
   .completed-task-details h4 {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .full-title,
   .completed-full-title {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .task-description,
   .completed-task-description {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .task-details p,
@@ -577,10 +579,10 @@
   }
 
   .log-out-btn {
-    position: absolute;
-    top: 20px;
+    top: 15px;
     right: 15px;
     font-size: 16px;
-    padding: 5px 10px;
+    padding: 8px 12px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
   }
 }
