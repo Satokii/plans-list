@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import ExpandIcon from "../../../public/assets/svgs/expand.svg";
@@ -13,6 +14,9 @@ export default function CompletedTasks({
   showConfirmModal,
   setShowConfirmModal,
 }) {
+  const [showRestoreModal, setShowRestoreModal] = useState(false);
+  const [taskToRestore, setTaskToRestore] = useState(null);
+
   const restoreTask = async (taskId) => {
     if (!user || !user.id) {
       console.error("User is not logged in or user ID is missing.");
@@ -36,6 +40,14 @@ export default function CompletedTasks({
         task.id === taskId ? { ...task, completed: false } : task
       )
     );
+    setShowRestoreModal(false);
+    setTaskToRestore(null);
+  };
+
+  const handleRestoreClick = (e, taskId) => {
+    e.stopPropagation();
+    setTaskToRestore(taskId);
+    setShowRestoreModal(true);
   };
 
   return (
@@ -66,10 +78,7 @@ export default function CompletedTasks({
 
                     <button
                       className="restore-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        restoreTask(task.id);
-                      }}
+                      onClick={(e) => handleRestoreClick(e, task.id)}
                     >
                       ♻️ Reactivate Activity
                     </button>
@@ -107,7 +116,7 @@ export default function CompletedTasks({
         )
       )}
 
-      {/* Custom Confirmation Modal */}
+      {/* Delete Confirmation Modal */}
       {showConfirmModal && (
         <div className="confirm-modal">
           <div className="confirm-modal-content">
@@ -118,6 +127,27 @@ export default function CompletedTasks({
             <button
               className="cancel-btn"
               onClick={() => setShowConfirmModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Restore Confirmation Modal */}
+      {showRestoreModal && (
+        <div className="confirm-modal">
+          <div className="confirm-modal-content">
+            <p>Would you like to reactivate this activity?</p>
+            <button
+              className="confirm-btn"
+              onClick={() => restoreTask(taskToRestore)}
+            >
+              Reactivate
+            </button>
+            <button
+              className="cancel-btn"
+              onClick={() => setShowRestoreModal(false)}
             >
               Cancel
             </button>

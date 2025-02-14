@@ -21,7 +21,7 @@ export default function ActiveTasks({
       return;
     }
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("todos")
       .update({ completed: true })
       .eq("id", taskId)
