@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
-import Image from "next/image";
-import ExpandIcon from "../../../public/assets/svgs/expand.svg";
 
 export default function CompletedTasks({
   tasks,
