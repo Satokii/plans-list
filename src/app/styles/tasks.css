@@ -151,11 +151,12 @@
   font-size: 18px;
   font-weight: bold;
   color: #d35400;
-  margin-bottom: 6px;
+  margin: 6px 0;
 }
 
 .task-description,
-.completed-task-description {
+.completed-task-description,
+.task-add-date {
   font-size: 15px;
   color: #555;
   line-height: 1.5;

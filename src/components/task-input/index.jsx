@@ -13,6 +13,7 @@ export default function TaskInput({
 }) {
   const addTask = async () => {
     if (!user || input.trim() === "") return;
+
     const { data, error } = await supabase
       .from("todos")
       .insert([
@@ -21,6 +22,7 @@ export default function TaskInput({
           description: description,
           completed: false,
           user_id: user.id,
+          created_at: new Date().toISOString(),
         },
       ])
       .select();

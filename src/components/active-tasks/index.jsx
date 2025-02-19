@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import ExpandIcon from "../../../public/assets/svgs/expand.svg";
+import { format } from "date-fns";
 
 export default function ActiveTasks({
   tasks,
@@ -14,7 +15,7 @@ export default function ActiveTasks({
   confirmDelete,
   showConfirmModal,
   setShowConfirmModal,
-  isDeleteLoading
+  isDeleteLoading,
 }) {
   const markTaskAsComplete = async (taskId) => {
     if (!user || !user.id) {
@@ -103,6 +104,12 @@ export default function ActiveTasks({
                         <p className="task-description">
                           {task.description || "No description provided"}
                         </p>
+                      </div>
+                      <div>
+                        <h4>Created:</h4>
+                        <p className="task-add-date">
+                        {format(new Date(task.created_at), "dd MMM yyyy HH:mm")}
+                      </p>
                       </div>
                     </div>
                   )}

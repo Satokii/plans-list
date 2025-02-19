@@ -85,14 +85,10 @@
     font-size: 12px;
   }
 
-  .task-description,
-  .completed-task-description {
-    font-size: 12px;
-  }
-
   .task-details p,
   .completed-task-details p {
-    padding: 4px 0;
+    font-size: 12px;
+    padding: 2px 0;
   }
 
   .log-out-btn {
