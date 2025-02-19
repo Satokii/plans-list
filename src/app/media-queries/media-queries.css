@@ -158,7 +158,7 @@
   }
 
   .confirm-btn,
-  .cancel-btn {
+  .cancel-modal-btn {
     width: 100%;
     margin: 5px 0;
     font-size: 14px;
@@ -217,7 +217,7 @@
   }
 
   .confirm-btn,
-  .cancel-btn {
+  .cancel-modal-btn {
     font-size: 12px;
     padding: 6px 8px;
   }

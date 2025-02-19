@@ -254,7 +254,7 @@ export default function ActiveTasks({
                   Confirm
                 </button>
                 <button
-                  className="cancel-btn"
+                  className="cancel-modal-btn"
                   onClick={() => setShowConfirmModal(false)}
                 >
                   Cancel

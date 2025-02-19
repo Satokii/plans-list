@@ -292,8 +292,8 @@
   color: black;
 }
 
-.confirm-btn {
-  background: #ff4500;
+.confirm-btn,
+.cancel-modal-btn {
   color: white;
   padding: 8px 16px;
   border: none;
@@ -303,8 +303,20 @@
   transition: 0.3s;
 }
 
+.confirm-btn {
+  background: #ff4500;
+}
+
 .confirm-btn:hover {
   background: #e63e00;
+}
+
+.cancel-modal-btn {
+  background: gray;
+}
+
+.cancel-modal-btn:hover {
+  background: rgb(70, 70, 70);
 }
 
 /* Carrot Loading Spinner */

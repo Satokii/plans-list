@@ -151,7 +151,7 @@ export default function CompletedTasks({
                   Confirm
                 </button>
                 <button
-                  className="cancel-btn"
+                  className="cancel-modal-btn"
                   onClick={() => setShowConfirmModal(false)}
                 >
                   Cancel
@@ -178,7 +178,7 @@ export default function CompletedTasks({
                   Reactivate
                 </button>
                 <button
-                  className="cancel-btn"
+                  className="cancel-modal-btn"
                   onClick={() => setShowRestoreModal(false)}
                 >
                   Cancel
