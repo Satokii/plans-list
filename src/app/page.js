@@ -29,26 +29,53 @@ export default function Home() {
 
   const router = useRouter();
 
+  // --------------------------------------------
+  // LOGIC TO ONLY SHOW USER TASKS
+
+  // useEffect(() => {
+  //   const checkUser = async () => {
+  //     const {
+  //       data: { user },
+  //     } = await supabase.auth.getUser();
+  //     if (!user) {
+  //       router.push("/login");
+  //     } else {
+  //       setUser(user);
+  //       fetchTasks(user.id);
+  //     }
+  //   };
+  //   checkUser();
+  // }, [router]);
+
+  // const fetchTasks = async (userId) => {
+  //   const { data, error } = await supabase
+  //     .from("todos")
+  //     .select("*")
+  //     .eq("user_id", userId);
+  //   if (!error) setTasks(data);
+  // };
+
+  // --------------------------------------------
+
   useEffect(() => {
     const checkUser = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
       if (!user) {
         router.push("/login");
       } else {
         setUser(user);
-        fetchTasks(user.id);
+        fetchTasks();
       }
     };
+
     checkUser();
   }, [router]);
 
-  const fetchTasks = async (userId) => {
-    const { data, error } = await supabase
-      .from("todos")
-      .select("*")
-      .eq("user_id", userId);
+  const fetchTasks = async () => {
+    const { data, error } = await supabase.from("todos").select("*");
     if (!error) setTasks(data);
   };
 
