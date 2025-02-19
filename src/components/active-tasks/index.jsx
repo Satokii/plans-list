@@ -118,7 +118,7 @@ export default function ActiveTasks({
                     />
                     <span className="task-text">{task.text}</span>
 
-                    <button
+                    {/* <button
                       className="complete-btn"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -146,19 +146,21 @@ export default function ActiveTasks({
                       onClick={(e) => handleDeleteClick(e, task.id)}
                     >
                       🗑️ Delete
-                    </button>
+                    </button> */}
                   </div>
 
                   {expandedTaskId === task.id && (
                     <div className="task-details">
                       {editingTaskId === task.id && isEditing ? (
                         <>
+                          <label htmlFor="title">Title:</label>
                           <input
                             type="text"
                             className="edit-input"
                             value={editTitle}
                             onChange={(e) => setEditTitle(e.target.value)}
                           />
+                          <label htmlFor="Description">Description:</label>
                           <textarea
                             className="edit-textarea"
                             value={editDescription}
@@ -200,6 +202,32 @@ export default function ActiveTasks({
                             "dd MMM yyyy HH:mm"
                           )}
                         </p>
+                      </div>
+
+                      <div className="task-actions">
+                        <button
+                          className="complete-btn"
+                          onClick={() => markTaskAsComplete(task.id)}
+                        >
+                          ✔ Complete
+                        </button>
+                        <button
+                          className="edit-btn"
+                          onClick={() => {
+                            setEditingTaskId(task.id);
+                            setEditTitle(task.text);
+                            setEditDescription(task.description || "");
+                            setIsEditing(true);
+                          }}
+                        >
+                          ✏ Edit
+                        </button>
+                        <button
+                          className="remove-btn"
+                          onClick={(e) => handleDeleteClick(e, task.id)}
+                        >
+                          🗑 Delete
+                        </button>
                       </div>
                     </div>
                   )}

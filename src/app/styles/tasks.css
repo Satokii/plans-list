@@ -3,60 +3,68 @@
 .no-active-tasks-message,
 .no-completed-tasks-message {
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   font-family: "Indie Flower", cursive;
   color: #d65a00;
   background: rgba(255, 236, 205, 0.95);
-  padding: 14px 18px;
-  border-radius: 14px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-  animation: fadeIn 0.5s ease-in-out,
-    subtleBounce 1.4s infinite alternate ease-in-out;
-  max-width: 70%;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 16px;
+  border-radius: 16px;
+  margin: 30px auto;
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.6s ease-in-out,
+    subtleBounce 1.6s infinite alternate ease-in-out;
+  max-width: 80%;
+  transition: 0.3s ease-in-out;
+}
+
+.no-tasks-message:hover,
+.no-active-tasks-message:hover,
+.no-completed-tasks-message:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.2);
 }
 
 .no-tasks-message {
-  font-size: 20px;
   color: #ff4500;
   background: rgba(255, 214, 181, 0.95);
-  border-left: 4px solid #ff6f00;
+  border-left: 6px solid #ff6f00;
 }
 
 .no-active-tasks-message {
   color: #c45e00;
   background: rgba(255, 220, 190, 0.95);
-  border-left: 4px solid #ff6f00;
+  border-left: 6px solid #ff6f00;
 }
 
 .no-completed-tasks-message {
   color: #a84e00;
   background: rgba(255, 200, 160, 0.95);
-  border-left: 4px solid #ff6f00;
+  border-left: 6px solid #ff6f00;
 }
 
 /* Task List */
+/* Task List Headers */
 .tasks-header,
 .completed-tasks-header {
   font-size: 28px;
   font-weight: bold;
   color: black;
-  margin-top: 25px;
+  margin: 30px 0 15px;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-bottom: 3px solid #ff6f00;
+  border-bottom: 4px solid #ff6f00;
+  padding-bottom: 5px;
+  display: inline-block;
 }
 
+/* Task List */
 .list,
 .completed-tasks-list {
   width: 100%;
-  max-width: 500px;
-  margin-top: 20px;
+  max-width: 520px;
+  margin: 20px auto;
   list-style: none;
   padding: 0;
 }
@@ -66,18 +74,17 @@
 .completed-task {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   color: #333;
-  padding: 14px 16px;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
   font-size: 18px;
   transition: 0.3s ease-in-out;
   cursor: pointer;
-  overflow: hidden;
-  min-height: 55px;
-  animation: slideInFromTop 0.7s ease-out;
+  min-height: 60px;
+  animation: slideInFromTop 0.6s ease-out;
 }
 
 .task {
@@ -88,7 +95,7 @@
 .task:hover {
   background: linear-gradient(145deg, #ffdb70, #ffc107);
   transform: scale(1.02);
-  box-shadow: 0px 5px 12px rgba(255, 165, 0, 0.3);
+  box-shadow: 0px 6px 14px rgba(255, 165, 0, 0.3);
 }
 
 .completed-task {
@@ -99,7 +106,7 @@
 .completed-task:hover {
   background: linear-gradient(145deg, #ff8b6f, #ff5900);
   transform: scale(1.02);
-  box-shadow: 0px 5px 12px rgba(255, 94, 0, 0.3);
+  box-shadow: 0px 6px 14px rgba(255, 94, 0, 0.3);
 }
 
 .completed-task-text {
@@ -117,33 +124,38 @@
 .task span,
 .completed-task span {
   flex: 1;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 60%;
+  max-width: 65%;
   font-weight: 600;
 }
 
 .task-details,
 .completed-task-details {
   width: 100%;
-  padding: 16px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 12px;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 14px;
+  cursor: default;
   transition: 0.3s ease-in-out;
 }
 
 .task-details {
-  background: rgba(255, 211, 102, 0.4);
-  border-left: 4px solid #ffb300;
+  background: rgba(255, 211, 102, 0.45);
+  border-left: 5px solid #ffb300;
 }
 
 .completed-task-details {
-  background: rgba(255, 158, 128, 0.4);
-  border-left: 4px solid #ff5722;
+  background: rgba(255, 158, 128, 0.45);
+  border-left: 5px solid #ff5722;
+}
+
+.task-details:hover,
+.completed-task-details:hover {
+  box-shadow: 0px 7px 16px rgba(0, 0, 0, 0.2);
 }
 
 .task-details h4,
@@ -162,12 +174,7 @@
   font-style: italic;
 }
 
-.task-details:hover,
-.completed-task-details:hover {
-  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.2);
-}
-
-/* Complete & Remove Buttons */
+/* Complete & Remove & Edit Buttons */
 .task button,
 .completed-task button {
   flex-shrink: 0;
@@ -186,14 +193,23 @@
 }
 
 .complete-btn {
-  background: linear-gradient(145deg, #f4a261, #e08642);
-  margin-left: auto;
+  background: linear-gradient(145deg, #28a745, #068f26);
 }
 
 .complete-btn:hover {
-  background: linear-gradient(145deg, #f29a56, #d97930);
+  background: linear-gradient(145deg, #1cac3d, #066d1e);
   transform: scale(1.05);
-  box-shadow: 0px 4px 10px rgba(242, 154, 86, 0.4);
+  box-shadow: 0px 4px 12px rgba(34, 172, 66, 0.3);
+}
+
+.edit-btn {
+  background: linear-gradient(145deg, #f4a261, #f3852b);
+}
+
+.edit-btn:hover {
+  background: linear-gradient(145deg, #f09a54, #f07816);
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(244, 163, 97, 0.3);
 }
 
 .remove-btn {
@@ -202,9 +218,27 @@
 
 .remove-btn:hover {
   background: linear-gradient(145deg, #d82e3c, #aa2027);
-  animation: wiggle 0.2s ease-in-out;
   transform: scale(1.05);
-  box-shadow: 0px 4px 10px rgba(216, 46, 60, 0.4);
+  box-shadow: 0px 4px 12px rgba(216, 46, 60, 0.3);
+  animation: wiggle 0.2s ease-in-out;
+}
+
+.task-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.task-actions button {
+  flex: 1;
+  margin: 6px;
+  padding: 10px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .restore-btn {
@@ -274,20 +308,6 @@
   background: #e63e00;
 }
 
-.cancel-btn {
-  background: gray;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.cancel-btn:hover {
-  background: darkgray;
-}
-
 /* Carrot Loading Spinner */
 .carrot-spinner {
   display: inline-block;
@@ -297,14 +317,36 @@
 }
 
 /* Edit Tasks */
+.task-details label {
+  font-size: 14px;
+}
+
 .edit-input,
 .edit-textarea {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
   border: 1px solid #ccc;
+  color: black;
+  font-family: "Indie Flower", cursive;
+  background: #fff4e6;
+  border: 1px solid #ff914d;
   border-radius: 5px;
   font-size: 14px;
+  outline: none;
+}
+
+.edit-input:hover,
+.edit-textarea:hover {
+  border-color: #ff6f00;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.edit-input:focus,
+.edit-textarea:focus {
+  box-shadow: 0px 0px 8px rgba(255, 111, 0, 0.7);
+  border-color: #ff6f00;
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .edit-textarea {
@@ -312,18 +354,13 @@
   resize: vertical;
 }
 
-.edit-btn, .save-btn, .cancel-btn {
+.save-btn,
+.cancel-btn {
   margin-top: 5px;
   padding: 6px 12px;
   border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
-}
-
-.edit-btn {
-  background-color: #f4a261;
-  color: white;
-  border: none;
 }
 
 .save-btn {
@@ -336,4 +373,12 @@
   background-color: #e63946;
   color: white;
   border: none;
+}
+
+.save-btn:hover {
+  background-color: #0e766a;
+}
+
+.cancel-btn:hover {
+  background: #cb1322;
 }

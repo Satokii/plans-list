@@ -1,4 +1,39 @@
 /* MEDIA QUERIES */
+@media (max-width: 800px) {
+  .container {
+    padding: 50px 20px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .task-preview,
+  .completed-task-preview {
+    font-size: 16px;
+  }
+
+  .task span,
+  .completed-task span {
+    font-size: 14px;
+  }
+
+  .task button,
+  .completed-task button {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .confirm-modal-content {
+    max-width: 320px;
+  }
+
+  .edit-input,
+  .edit-textarea {
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 600px) {
   .container {
     padding: 40px 15px;
@@ -6,7 +41,7 @@
 
   .title {
     font-size: 28px;
-    margin-top: 30px;
+    margin-top: 40px;
   }
 
   .title::before,
@@ -91,6 +126,19 @@
     padding: 2px 0;
   }
 
+  .task-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .task-actions button {
+    width: 100%;
+    max-width: 220px;
+    font-size: 14px;
+    padding: 10px;
+    margin: 6px 4px;
+  }
+
   .log-out-btn {
     top: 15px;
     right: 15px;
@@ -125,5 +173,57 @@
   .cancel-btn {
     font-size: 12px;
     padding: 5px 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 30px 10px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .input-container {
+    padding: 10px;
+  }
+
+  .input-container .input,
+  .description-input {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .task span,
+  .completed-task span {
+    font-size: 12px;
+  }
+
+  .task button,
+  .completed-task button {
+    font-size: 12px;
+    padding: 5px 8px;
+    min-height: 40px;
+  }
+
+  .confirm-modal-content {
+    width: 90%;
+  }
+
+  .confirm-modal-content p {
+    font-size: 14px;
+  }
+
+  .confirm-btn,
+  .cancel-btn {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .edit-input,
+  .edit-textarea {
+    font-size: 12px;
+    padding: 6px;
   }
 }
