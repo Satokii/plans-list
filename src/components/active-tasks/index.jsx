@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import ExpandIcon from "../../../public/assets/svgs/expand.svg";
 import { format } from "date-fns";
@@ -17,6 +18,11 @@ export default function ActiveTasks({
   setShowConfirmModal,
   isDeleteLoading,
 }) {
+  const [editingTaskId, setEditingTaskId] = useState(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+
   const markTaskAsComplete = async (taskId) => {
     if (!user || !user.id) {
       console.error("User is not logged in or user ID is missing.");
