@@ -1,5 +1,7 @@
 import { supabase } from "@/lib/supabase";
 
+import "../../app/styles/task-input.css";
+
 export default function TaskInput({
   tasks,
   setTasks,
