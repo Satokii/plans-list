@@ -114,4 +114,16 @@
     margin: 5px 0;
     font-size: 14px;
   }
+
+  .edit-input,
+  .edit-textarea {
+    font-size: 12px;
+  }
+
+  .edit-btn,
+  .save-btn,
+  .cancel-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
 }
