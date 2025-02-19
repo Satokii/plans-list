@@ -1,6 +1,8 @@
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 
+import "../../app/styles/logout-button.css";
+
 export default function LogoutButton() {
   const router = useRouter();
 
