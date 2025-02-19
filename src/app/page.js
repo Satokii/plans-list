@@ -10,6 +10,7 @@ import CompletedTasks from "@/components/completed-tasks";
 import LogoutButton from "@/components/logout-button";
 
 import "./styles.css";
+import "./keyframes/keyframes.css"
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
