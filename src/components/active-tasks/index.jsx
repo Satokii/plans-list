@@ -59,6 +59,39 @@ export default function ActiveTasks({
     );
   };
 
+  const updateTask = async (taskId) => {
+    if (!user || !user.id) {
+      console.error("User is not logged in.");
+      return;
+    }
+
+    const { error } = await supabase
+      .from("todos")
+      .update({
+        text: editTitle,
+        description: editDescription,
+      })
+      .eq("id", taskId)
+      .eq("user_id", user.id)
+      .select();
+
+    if (error) {
+      console.error("Error updating task:", error);
+      return;
+    }
+
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId
+          ? { ...task, text: editTitle, description: editDescription }
+          : task
+      )
+    );
+
+    setEditingTaskId(null);
+    setIsEditing(false);
+  };
+
   return (
     <>
       {tasks.some((task) => !task.completed) ? (
@@ -96,6 +129,19 @@ export default function ActiveTasks({
                     </button>
 
                     <button
+                      className="edit-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setEditingTaskId(task.id);
+                        setEditTitle(task.text);
+                        setEditDescription(task.description || "");
+                        setIsEditing(true);
+                      }}
+                    >
+                      ✏️ Edit
+                    </button>
+
+                    <button
                       className="remove-btn"
                       onClick={(e) => handleDeleteClick(e, task.id)}
                     >
@@ -105,16 +151,47 @@ export default function ActiveTasks({
 
                   {expandedTaskId === task.id && (
                     <div className="task-details">
-                      <div>
-                        <h4>Title</h4>
-                        <p className="full-title">{task.text}</p>
-                      </div>
-                      <div>
-                        <h4>Description</h4>
-                        <p className="task-description">
-                          {task.description || "No description provided"}
-                        </p>
-                      </div>
+                      {editingTaskId === task.id && isEditing ? (
+                        <>
+                          <input
+                            type="text"
+                            className="edit-input"
+                            value={editTitle}
+                            onChange={(e) => setEditTitle(e.target.value)}
+                          />
+                          <textarea
+                            className="edit-textarea"
+                            value={editDescription}
+                            onChange={(e) => setEditDescription(e.target.value)}
+                          />
+                          <button
+                            className="save-btn"
+                            onClick={() => updateTask(task.id)}
+                          >
+                            💾 Save
+                          </button>
+                          <button
+                            className="cancel-btn"
+                            onClick={() => setEditingTaskId(null)}
+                          >
+                            ❌ Cancel
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <div>
+                            <h4>Title</h4>
+                            <p className="full-title">{task.text}</p>
+                          </div>
+                          <div>
+                            <h4>Description</h4>
+                            <p className="task-description">
+                              {task.description || "No description provided"}
+                            </p>
+                          </div>
+                        </>
+                      )}
+
                       <div>
                         <h4>Created:</h4>
                         <p className="task-add-date">
