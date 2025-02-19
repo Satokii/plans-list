@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { format } from "date-fns";
 
 export default function CompletedTasks({
   tasks,
@@ -105,6 +106,24 @@ export default function CompletedTasks({
                         <h4>Description</h4>
                         <p className="completed-task-description">
                           {task.description || "No description provided"}
+                        </p>
+                      </div>
+                      <div>
+                        <h4>Created:</h4>
+                        <p className="task-add-date">
+                          {format(
+                            new Date(task.created_at),
+                            "dd MMM yyyy HH:mm"
+                          )}
+                        </p>
+                      </div>
+                      <div>
+                        <h4>Completed:</h4>
+                        <p className="task-complete-date">
+                          {format(
+                            new Date(task.completed_at),
+                            "dd MMM yyyy HH:mm"
+                          )}
                         </p>
                       </div>
                     </div>

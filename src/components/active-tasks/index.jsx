@@ -23,9 +23,11 @@ export default function ActiveTasks({
       return;
     }
 
+    const completedAt = new Date().toISOString();
+
     const { error } = await supabase
       .from("todos")
-      .update({ completed: true })
+      .update({ completed: true, completed_at: completedAt })
       .eq("id", taskId)
       .eq("user_id", user.id)
       .select();
@@ -44,7 +46,9 @@ export default function ActiveTasks({
 
     setTasks(
       tasks.map((task) =>
-        task.id === taskId ? { ...task, completed: true } : task
+        task.id === taskId
+          ? { ...task, completed: true, completed_at: completedAt }
+          : task
       )
     );
   };
@@ -108,8 +112,11 @@ export default function ActiveTasks({
                       <div>
                         <h4>Created:</h4>
                         <p className="task-add-date">
-                        {format(new Date(task.created_at), "dd MMM yyyy HH:mm")}
-                      </p>
+                          {format(
+                            new Date(task.created_at),
+                            "dd MMM yyyy HH:mm"
+                          )}
+                        </p>
                       </div>
                     </div>
                   )}
