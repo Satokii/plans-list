@@ -75,7 +75,10 @@ export default function Home() {
   }, [router]);
 
   const fetchTasks = async () => {
-    const { data, error } = await supabase.from("todos").select("*");
+    const { data, error } = await supabase
+      .from("todos")
+      .select("*")
+      .order("created_at", { ascending: false });
     if (!error) setTasks(data);
   };
 
