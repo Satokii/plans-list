@@ -57,6 +57,7 @@ export default function ActiveTasks({
           : task
       )
     );
+    console.log(tasks);
   };
 
   const updateTask = async (taskId) => {
@@ -100,6 +101,7 @@ export default function ActiveTasks({
           <ul className="list">
             {tasks
               .filter((task) => !task.completed)
+              .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
               .map((task) => (
                 <li
                   key={task.id}
