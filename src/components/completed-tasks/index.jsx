@@ -65,6 +65,7 @@ export default function CompletedTasks({
           <ul className="completed-tasks-list">
             {tasks
               .filter((task) => task.completed)
+              .sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at))
               .map((task) => (
                 <li
                   key={task.id}
